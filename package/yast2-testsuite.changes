@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 27 16:11:52 CET 2003 - arvin@suse.de
+
+- added popt to neededforbuild
+
+-------------------------------------------------------------------
 Mon Jan 20 19:46:30 CET 2003 - msvec@suse.de
 
 - better (non-conflicting) local name variable
