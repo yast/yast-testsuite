@@ -3,8 +3,8 @@
 # $Id$
 #
 
-datadir = @yast2dir@/testsuite
-skeldir = @yast2dir@/testsuite/skel
+datadir = @ydatadir@/testsuite
+skeldir = @ydatadir@/testsuite/skel
 
 data_DATA =			\
 	Makefile.testsuite

@@ -1,11 +1,11 @@
 @HEADER-COMMENT@
-
-# neededforbuild  autoconf automake yast2-core yast2-core-devel yast2-devtools
+# neededforbuild yast2 yast2-core yast2-core-devel yast2-devtools
 
 @HEADER@
-BuildArchitectures: noarch
 Requires:	yast2 expect dejagnu yast2-core-devel
-Summary:	YaST2 Testsuite
+Summary:	YaST2 testsuite
+
+BuildArchitectures: noarch
 
 %description
 -
@@ -20,9 +20,7 @@ Summary:	YaST2 Testsuite
 
 %files
 %defattr(-,root,root)
-# %dir @yast2dir@/testsuite
-# @yast2dir@/testsuite/*
-%dir /usr/lib/YaST2/testsuite
-/usr/lib/YaST2/testsuite/*
+%dir @ydatadir@/testsuite
+@ydatadir@/testsuite/*
 @yncludedir@/testsuite.ycp
 %doc @docdir@

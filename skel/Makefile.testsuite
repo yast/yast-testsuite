@@ -3,7 +3,7 @@
 # $Id$
 #
 
-maindir=/usr/lib/YaST2/testsuite
+maindir=/usr/lib/YaST2/data/testsuite
 skeldir=$(maindir)/skel
 
 testsuite_dirs=$(srcdir)/run $(srcdir)/config $(srcdir)/$(RPMNAME).test
