@@ -25,7 +25,6 @@ If not, take a look at <a href="create.html">creation chapter</a>.
 For instance, there is a <tt>Test1.ycp</tt> test case in the
 <tt>testsuite/tests/</tt> directory.
 
-<p>
 <h3>Running tests</h3>
 
 Change dir to the testsuite directory and run
@@ -37,18 +36,28 @@ This command produce a lot of output and some files. During a first
 run, it says "test failed", but it doesn't matter as we just started
 to create the testsuite and it's now a work in progress. Interesting
 files are those "tmp.*". There is a normal (tmp.out.*) and error
-(tmp.err.*) output of the real check. 
+(tmp.err.*) output of the real check.
 
 <p>
 After creation of Test1.ycp and make check, there should be a
 tmp.out.Test1 and tmp.err.Test1 files. The error file should be
 empty (no errors) and in the output file there is a test output.
 
-<p>
+<h3>Diffing output</h3>
+
+<p>Take a look at the output files, if they contains the right output
+(no errors, right results).</p>
+
+<p>Often large YCP lists or maps are involved, all on a single line, and an
+ordinary <code>diff</code> does not help. Use <code>wdiff</code> from wdiff.rpm
+to diff by words:</p>
+<pre>
+    bash$ wdiff -la tmp.out.Test1 tests/Test1.out
+</pre>
+
 <h3>Updating output</h3>
 
-Take a look at the output files, if they contains the right output
-(no errors, right results) and copy them to tests/Test1.out
+<p>If the output files are OK, copy them to tests/Test1.out
 (tmp.out.Test1) and tests/Test1.err (tmp.err.Test1).
 
 <pre>
@@ -65,7 +74,6 @@ if the test passed.
 <i>Note: as you may see, the test is based on a comparison of a given
 and a real outputs of the test run</i>
 
-<p>
 <h3>Finish</h3>
 
 Now, the testsuite should be ready. Run the check once more to ensure
