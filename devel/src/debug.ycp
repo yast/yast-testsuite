@@ -1,15 +1,8 @@
 /**
- * File:
- *   debug.ycp
- *
- * Module:
- *   Developpers functions
- *
- * Summary:
- *   Debugging functions
- *
- * Authors:
- *   Michal Svec <msvec@suse.cz>
+ * File:	include/debug/debug.ycp
+ * Module:	Developpers functions
+ * Summary:	Debugging functions
+ * Authors:	Michal Svec <msvec@suse.cz>
  *
  * $Id$
  *
@@ -20,14 +13,19 @@
 
 {
 
+global define term any2tree(any value);
+global define list any2items(any a);
+global define list list2items(list l);
+global define list map2items(map m);
+
 /**
  * Create a tree from any value.
  * @param value value to be converted
  * @return tree widget created from the value
  */
-global define term any2tree(any value) ``{
+global define term any2tree(any value) {
     string label = "&DEBUG output:";
-    term tree = `Tree(`opt(`hstretch, `vstretch),label);
+    term tree = `Tree(`id(`tree), `opt(`hstretch, `vstretch),label);
     list items = any2items(value);
     tree = add(tree,items);
     return tree;
@@ -38,13 +36,13 @@ global define term any2tree(any value) ``{
  * @param a value to be converted
  * @return items for the tree widget
  */
-global define list any2items(any a) ``{
+global define list any2items(any a) {
     if(a == nil)
 	return [ "NIL" ];
     else if(is(a,map))
-	return map2items(a);
+	return map2items((map)a);
     else if(is(a,list))
-	return list2items(a);
+	return list2items((list)a);
     else if(is(a,string))
 	return [ sformat("\"%1\"",a) ];
     else
@@ -56,14 +54,14 @@ global define list any2items(any a) ``{
  * @param l list to be converted
  * @return items for the tree widget
  */
-global define list list2items(list l) ``{
+global define list list2items(list l) {
     list ret = [];
 
-    ret = maplist(`val, l, ``{
+    ret = maplist(`val, l, {
 	string st = ""; //"+";
 	list it = any2items(val);
 	if(!is(val,map) && ! is(val,list)) {
-	    st = select(it,0,"");
+	    st = (string) select(it,0,"");
 	    it = [];
 	}
 	term te = `item(st,it);
@@ -78,12 +76,12 @@ global define list list2items(list l) ``{
  * @param m map to be converted
  * @return items for the tree widget
  */
-global define list map2items(map m) ``{
+global define list map2items(map m) {
     list ret = [];
 
-    ret = maplist(`key, `val, m, ``{
+    ret = maplist(`key, `val, m, {
 	list it = any2items(val);
-	string st = select(any2items(key),0,"");
+	string st = (string) select(any2items(key),0,"");
 	term te = `item(st,it);
 	return te;
     });
@@ -96,7 +94,7 @@ global define list map2items(map m) ``{
  * @param value value to be displayed
  * @return true if success
  */
-global define boolean DEBUG(any value) ``{
+global define boolean DEBUG(any value) {
 
     UI::OpenDialog(`VBox(`Label("Processing the DEBUG value")));
     term res = any2tree(value);
@@ -105,6 +103,7 @@ global define boolean DEBUG(any value) ``{
 			`PushButton(`id(`ok),`opt(`default),"&OK"),
 			`PushButton(`id(`save),"&Save")
     )));
+    UI::SetFocus(`id(`tree));
     any ret = UI::UserInput();
     UI::CloseDialog();
     if(ret == `save) {
@@ -112,17 +111,17 @@ global define boolean DEBUG(any value) ``{
 	any home = SCR::Execute(.target.bash_output, "echo $HOME");
 	any x = "";
 	if(is(home,map)) {
-	    home = lookup(home,"stdout",nil);
+	    home = lookup((map) home,"stdout",nil);
 	    if(home!=nil) {
-		home = lookup(home,"stdout","");
-		home = splitstring(home," \n");
-		home = select(home,0,"");
-	        home = home + "/.yast2";
+		home = lookup((map) home,"stdout","");
+		home = splitstring((string) home," \n");
+		home = select((list) home,0,"");
+	        home = (string) home + "/.yast2";
 		if(SCR::Read(.target.size,home)!=-1) {
-		    home = home + "/DEBUGoutput.ycp";
+		    home = (string) home + "/DEBUGoutput.ycp";
 		    y2debug("home=%1",home);
 		    string text = "";
-		    any ret = SCR::Write(.target.ycp,home,value)==true;
+		    boolean ret = SCR::Write(.target.ycp,home,value)==true;
 		    if(ret == true)
 			text = sformat("DEBUG output saved to: %1",home);
 		    else

@@ -42,7 +42,7 @@ DUMMY_LOG_STRING="LOGTHIS_SECRET_314 "
 files="$(grep '^[/* 	]*testedfiles:' "$1"|sed "s/.*testedfiles:[ 	]*//g")"
 if [ "$files" ]; then
   echo "$files" >> testsuite.log
-  regex="[ /](testsuite\.ycp|$(echo "$files"|sed 's|\.|\\.|g'|sed 's| |\||g')):"
+  regex="[ /](testsuite\.ycp|Testsuite\.ycp|$(echo "$files"|sed 's|\.|\\.|g'|sed 's| |\||g')):"
 fi
 echo "$regex" >> testsuite.log
 

@@ -1,0 +1,122 @@
+/**
+ * File:	modules/Testsuite.ycp
+ * Package:	Testsuite
+ * Summary:	Main testsuite module
+ * Authors:	Michal Svec <msvec@suse.cz>
+ *
+ * $Id$
+ */
+
+{
+
+module "Testsuite";
+
+/**
+ * Secret string :-)
+ */
+string dummy_log_string = "LOGTHIS_SECRET_314 ";
+
+/**
+ * @param INPUT a tuple of read, write and execute maps
+ * @param DEFAULT default read value
+ * @return list of various SCR return values
+ */
+global list Init (list<any> INPUT, any DEFAULT) {
+
+    any default = $[];
+
+    any read = INPUT[0]: default;
+    any write = INPUT[1]: default;
+    any exec = INPUT[2]: default;
+
+    y2debug ("READ=%1", read);
+    y2debug ("WRITE=%1", write);
+    y2debug ("EXECUTE=%1", exec);
+    y2debug ("DEFAULT=%1", DEFAULT);
+
+    // initialize
+    list ret = [];
+    ret = add (ret, SCR::UnregisterAllAgents ());
+    ret = add (ret, SCR::RegisterAgent (., `ag_dummy(`DataMap(read, write, exec, DEFAULT))));
+    y2debug ("ret=%1", ret);
+
+    return ret;
+}
+
+/**
+ * @param FUNCTION a single or deep quoted term
+ * @param INPUT a tuple of read, write and execute maps
+ * @param DEFAULT default read value
+ * @return whatever the FUNCTION returns
+ */
+global define any TEST (any FUNCTION, list<any> INPUT, any DEFAULT) {
+
+    y2debug ("FUNCTION=%1", FUNCTION);
+
+    Init (INPUT, DEFAULT);
+
+    any real_ret = eval (FUNCTION);
+
+    y2debug ("%1Return\t%2", dummy_log_string, real_ret);
+
+    return real_ret;
+}
+
+global define any Test (term FUNCTION, list<any> INPUT, any DEFAULT) {
+
+    y2debug ("FUNCTION=%1", FUNCTION);
+
+    Init (INPUT, DEFAULT);
+
+    any real_ret = FUNCTION;
+
+    y2debug ("%1Return\t%2", dummy_log_string, real_ret);
+
+    return real_ret;
+}
+
+/**
+ * Dump value to the testsuite output (keyword: Dump)
+ * @param output whatever to be dumped into the log
+ */
+global void Dump (any output) {
+    string out = sformat ("%1", output);
+    list<string> lines = splitstring (out, "\n");
+    maplist (string l, lines, {
+	return y2debug ("%1Dump\t%2", dummy_log_string, l);
+    });
+    if(size(lines) < 1)
+	y2debug ("%1Dump\t%2", dummy_log_string, out);
+}
+
+/**
+ * Dump file contents to the testsuite output (keyword: File)
+ * @param filename file to be dumped
+ */
+global void DumpFile (string filename) {
+
+    string command = sformat("/bin/cat \"%1\" | sed \"s/^/%2File\t/\"",
+	    filename, dummy_log_string);
+
+    SCR::RegisterAgent (.target, "/usr/share/YaST2/scrconf/target.scr");
+    map res = (map) SCR::Execute (.target.bash_output, command);
+    SCR::UnregisterAllAgents ();
+
+    string out = lookup (res, "stdout", " (nil)");
+    list<string> lines = splitstring (out, "\n");
+    maplist (string l, lines, {
+	return y2debug ("%1", l);
+    });
+    if(size(lines) < 1)
+	y2debug ("%1File\t%2", dummy_log_string, out);
+}
+
+/**
+ * Constructor (initialize SCR with dummy agent)
+ */
+void Testsuite() {
+    Init ([], nil);
+}
+
+/* EOF */
+}
