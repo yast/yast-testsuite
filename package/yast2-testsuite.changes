@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Apr  3 18:57:38 CEST 2004 - kkaempf@suse.de
+
+- filter [Y2PMrc] messages from logfile (#38235)
+- 2.9.9
+
+-------------------------------------------------------------------
 Fri Apr  2 17:20:47 CEST 2004 - msvec@suse.cz
 
 - changed license to GPL
