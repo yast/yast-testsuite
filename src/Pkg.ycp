@@ -65,7 +65,9 @@
 	// if it's a map, look up the parameter
 	if (is (result, map))
 	{
-	    result = result[p1]:nil;
+            map result_map = (map) result;
+
+            result = result_map[p1]:nil;
 	}
 
 	if (verbose)
@@ -82,7 +84,7 @@
      * @return availability
      */
     global define boolean IsAvailable (string p) ``{
-	return FAKE_FUNCTION1 (true, `IsAvailable, p);
+	return (boolean) FAKE_FUNCTION1 (true, `IsAvailable, p);
     }
 
     /**
@@ -91,7 +93,7 @@
      * @return availability
      */
     global define boolean IsProvided (string p) ``{
-	return FAKE_FUNCTION1 (true, `IsProvided, p);
+	return (boolean) FAKE_FUNCTION1 (true, `IsProvided, p);
     }
 
     /**
