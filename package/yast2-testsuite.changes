@@ -1,7 +1,13 @@
 -------------------------------------------------------------------
+Mon Sep  8 10:43:38 CEST 2003 - msvec@suse.cz
+
+- makefiles updates by arvin and schwab
+- 2.8.3
+
+-------------------------------------------------------------------
 Fri Jul 11 11:07:33 CEST 2003 - mvidner@suse.cz
 
-- Mentioned wdiff in the docs.
+- mentioned wdiff in the docs.
 
 -------------------------------------------------------------------
 Thu Jun 12 11:46:43 CEST 2003 - arvin@suse.de
