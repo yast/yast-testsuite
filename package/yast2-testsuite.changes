@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jun 26 14:07:24 CEST 2002 - mvidner@suse.cz
+
+- Fix build errors (automake version mismatch) by not overwriting Makefile.am
+- Run tests in alphabetical order.
+- 2.6.3
+
+-------------------------------------------------------------------
 Fri May 31 14:37:38 CEST 2002 - msvec@suse.cz
 
 - possibility to test constructors
