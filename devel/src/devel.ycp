@@ -1,0 +1,29 @@
+/**
+ * File:
+ *   devel.ycp
+ *
+ * Module:
+ *   Developpers functions
+ *
+ * Summary:
+ *   Main include file
+ *
+ * Authors:
+ *   Michal Svec <msvec@suse.cz>
+ *
+ * $Id$
+ *
+ * This file just includes all useful developers files.
+ */
+
+{
+
+/***
+ * Developers library
+ * <br>Enjoy!
+ */
+
+include "devel/bench.ycp";
+include "devel/debug.ycp";
+
+}

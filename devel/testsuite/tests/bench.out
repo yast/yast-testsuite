@@ -1,0 +1,18 @@
+Dump	BENCH
+Log	times=0
+Return	0
+Log	func1
+Log	func1
+Log	func1
+Return	0.00000000000000
+Dump	MULTIBENCH
+Log	times=0
+Return	0
+Return	[]
+Log	func1
+Log	func1
+Log	func1
+Log	func2
+Log	func2
+Log	func2
+Return	[0.00000000000000, 0.00000000000000]

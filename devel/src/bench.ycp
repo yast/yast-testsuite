@@ -1,0 +1,76 @@
+/**
+ * File:
+ *   bench.ycp
+ *
+ * Module:
+ *   Developpers functions
+ *
+ * Summary:
+ *   Benchmarking functions
+ *
+ * Authors:
+ *   Michal Svec <msvec@suse.cz>
+ *
+ * $Id$
+ *
+ * This file contains benchmarking functions. You should use them to
+ * compare different implemetations for speed.
+ */
+
+{
+
+/**
+ * Run the function many times and return elapsed time
+ * @param function function to be tested
+ * @param times how many times to run
+ * @return average number of seconds of one function run
+ */
+global define float BENCH(term function, integer times) ``{
+    integer i = 0;
+    integer start = 0;
+    integer finish = 0;
+
+    if(times == 0) {
+	y2error("times=0");
+	return 0;
+    }
+
+    y2debug("function=%1",function);
+    y2debug("times=%1",times);
+    start = time();
+    while(i < times) {
+	eval(function);
+	i = i + 1;
+    }
+    finish = time();
+    y2debug("start=%1",start);
+    y2debug("finish=%1",finish);
+    float count = finish-start;
+    float timesf = times;
+    float final = count/timesf;
+    y2debug("final=%1",final);
+    return final;
+}
+
+/**
+ * Run the given functions through the BENCH function
+ * @param functions list of functions to be tested
+ * @param times how many times to run
+ * @return results of tests
+ */
+global define list MULTIBENCH(list functions, integer times) ``{
+
+    if(times == 0) {
+	y2error("times=0");
+	return 0;
+    }
+
+    list ret = maplist(`f,functions,``{
+	if(!is(f,term)) return -1;
+	return BENCH(f,times);
+    });
+    return ret;
+}
+
+/* EOF */
+}
