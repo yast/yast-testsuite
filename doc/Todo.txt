@@ -1,0 +1,13 @@
+# $Id$
+
+Bugs:
+- diff before cp in Makefile (prevent timestamp changes)
+- don't create /tmp files #16223
+- use /usr/share
+
+Further extension:
+- testing agents
+- testing UI
+
+Future:
+- check each line of code

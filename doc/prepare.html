@@ -25,18 +25,14 @@ on testing yast2 modules.
 <h3>Prepare your module</h3>
 
 <pre>
-    bash$ cd ".../modules/y2c_blah"
-    bash$ make -f /usr/lib/YaST2/testsuite/Makefile.testsuite prepare
+    bash$ cd ".../source/blah"
+    bash$ make -f /usr/lib/YaST2/data/testsuite/Makefile.testsuite prepare
 
     This creates the testsuite directory.<br>
-    Now, add a file <tt>testsuite/Makefile</tt> to the AC_OUTPUT() macro
-    in your <tt>configure.in</tt> and create a Makefile.
-
-    Also, don't forget to add "testsuite" to SUBDIRS in Makefile.am.
+    Then just run <tt>make -f Makefile.cvs</tt>.
 
 <pre>
-    bash$ vim configure.in
-    bash$ vim Makefile.am
+    bash$ cd .../source/blah
     bash$ make -f Makefile.cvs
 
 <pre>
@@ -50,9 +46,8 @@ session can look like.
 
 <pre>
     bash$ sudo rpm -i yast2-testsuite.rpm
-    bash$ cd .../yast/modules/y2c_sec/
-    bash$ make -f /usr/lib/YaST2/testsuite/Makefile.testsuite prepare
-    bash$ vim configure.in
+    bash$ cd .../yast/source/security/
+    bash$ make -f /usr/lib/YaST2/data/testsuite/Makefile.testsuite prepare
     bash$ make -f Makefile.cvs
 
 </body></html>

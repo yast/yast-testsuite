@@ -49,6 +49,7 @@ prepare:
 	@mkdir testsuite
 	@echo Creating testsuite/tests
 	@mkdir testsuite/tests
+	@touch testsuite/tests/.cvsignore
 	@echo Preparing files
 	@make -C testsuite -f $(maindir)/Makefile.testsuite $(files_tmpl) $(files_tests)
 	@echo

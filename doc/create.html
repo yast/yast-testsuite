@@ -74,17 +74,17 @@ The READ, WRITE, EXECUTE and DEFAULT values are used only if
 the tested function uses SCR calls.
 
 <p>
-For example, SCR(`Read(.x)) returns 1. Other examples:
+For example, SCR::Read(.x) returns 1. Other examples:
 
 <ul>
-<li>SCR(`Read(.x)) -&gt; 1
-<li>SCR(`Read(.y.a)) -&gt; 2
-<li>SCR(`Read(.y.b)) -&gt; 3
-<li>SCR(`Read(.y.c)) -&gt; false
-<li>SCR(`Read(.z)) -&gt; false
-<li>SCR(`Execute(.target.mkdir,"/etc/gss.up")) -&gt; true
-<li>SCR(`Execute(.target.bash,"ls")) -&gt; 0
-<li>SCR(`Write(.x)) -&gt; true
+<li>SCR::Read(.x) -&gt; 1
+<li>SCR::Read(.y.a) -&gt; 2
+<li>SCR::Read(.y.b) -&gt; 3
+<li>SCR::Read(.y.c) -&gt; false
+<li>SCR::Read(.z) -&gt; false
+<li>SCR::Execute(.target.mkdir,"/etc/gss.up") -&gt; true
+<li>SCR::Execute(.target.bash,"ls") -&gt; 0
+<li>SCR::Write(.x) -&gt; true
 </ul>
 
 So, if your module reads string from the path .xhost.key, simply do:
@@ -106,9 +106,9 @@ You may want to take a look to some other modules for examples.
 <br>For instance:
 
 <ul>
-<li>security module (y2c_sec) for client testing
-<li>lan module (y2c_lan) for routines testing
-<li>packages module (y2m_inst/ycp/packages) for multiple SCR calls
+<li>security module (source/security) for client testing
+<li>lan module (source/network) for routines testing
+<li>packages module (source/package?/?) for multiple SCR calls
 </ul>
 
 </body></html>
