@@ -10,3 +10,12 @@ Dump	dump_string1
 Dump	dump_string2
 File	dump_file_string1
 File	dump_file_string2
+Dump	Pkg:: testing
+Log	Pkg::`IsProvided (sendmail): true
+Return	sendmail
+Log	Pkg::`IsProvided (sendmail): false
+Log	Pkg::`IsProvided (postfix): false
+Return	none
+Log	Pkg::`IsProvided (sendmail): false
+Log	Pkg::`IsProvided (postfix): true
+Return	postfix

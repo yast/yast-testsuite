@@ -1,0 +1,91 @@
+/**
+ * File:	Pkg.ycp
+ * Module:	Testsuite
+ * Summary:	Replacement for Pkg:: (yast2-core/wfm)
+ * Authors:	Martin Vidner <mvidner@suse.cz>
+ *
+ * $Id$
+ *
+ * WARNING!
+ * This is not what is usually called when you use Pkg::.
+ *
+ * Pkg is a namespace built into the WFMinterpreter. Normally you
+ * don't import it. For testsuites, we need to fake the return values and
+ * this is what this module is for.
+ *
+ * Usage:
+ *  include "testsuite.ycp";
+ *  import "Pkg";
+ *  import "TestedModule";
+ *  Pkg::FAKE (`IsProvided, true);
+ *  TEST (``(TestedModule::Read ()), [], nil);
+ *  Pkg::FAKE (`IsProvided, $[ "sendmail": false, "postfix": true]);
+ *  TEST (``(TestedModule::Read ()), [], nil);
+ *
+ * TODO: if there is a need to fake another namespace,
+ * factor out a Fake:: module
+ */
+
+{
+    module "Pkg";
+
+    /**
+     * Holds the data to be faked.
+     * So far works only for functions with 0 to 1 parameters.
+     * Keys: symbols (function names)
+     * Values: map => return value is looked up according to the parameter
+     *         other => returned directly
+     *
+     * future special handling: ``(Literal ($[ ... ]))
+     */
+    map fake = $[];
+
+    /**
+     * Assign a fake entry.
+     * (Needed because the parser only allows Pkg::func(...).)
+     * @param name	function name
+     * @param value	a map or other value
+     * @see fake
+     */
+    global define void FAKE (symbol name, any value) ``{
+	fake[name] = value;
+    }
+
+    /**
+     * Generalized faker for one parameter functions
+     * @param verbose log using y2internal what we did?
+     * @param name	function name
+     * @param p1	its parameter
+     * @return		faked return value
+     */
+    define any FAKE_FUNCTION1 (boolean verbose, symbol name, any p1) ``{
+	// look up the faked function
+	any result = fake[name]:nil;
+	// if it's a map, look up the parameter
+	if (is (result, map))
+	{
+	    result = result[p1]:nil;
+	}
+
+	if (verbose)
+	{
+	    y2internal ("Pkg::%1 (%2): %3", name, p1, result);
+	}
+	return result;
+
+    }
+
+    /**
+     * Faked WFM::Pkg::IsAvailable
+     */
+    global define boolean IsAvailable (string p) ``{
+	return FAKE_FUNCTION1 (true, `IsAvailable, p);
+    }
+
+    /**
+     * Faked WFM::Pkg::IsProvided
+     */
+    global define boolean IsProvided (string p) ``{
+	return FAKE_FUNCTION1 (true, `IsProvided, p);
+    }
+}
