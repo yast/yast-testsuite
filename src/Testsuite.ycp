@@ -49,26 +49,13 @@ global list Init (list<any> INPUT, any DEFAULT) {
  * @param DEFAULT default read value
  * @return whatever the FUNCTION returns
  */
-global define any TEST (any FUNCTION, list<any> INPUT, any DEFAULT) {
+global define any Test (any FUNCTION, list<any> INPUT, any DEFAULT) {
 
     y2debug ("FUNCTION=%1", FUNCTION);
 
     Init (INPUT, DEFAULT);
 
     any real_ret = eval (FUNCTION);
-
-    y2debug ("%1Return\t%2", dummy_log_string, real_ret);
-
-    return real_ret;
-}
-
-global define any Test (term FUNCTION, list<any> INPUT, any DEFAULT) {
-
-    y2debug ("FUNCTION=%1", FUNCTION);
-
-    Init (INPUT, DEFAULT);
-
-    any real_ret = FUNCTION;
 
     y2debug ("%1Return\t%2", dummy_log_string, real_ret);
 

@@ -9,89 +9,22 @@
 
 {
 
-/**
- * Secret string :-)
- */
-string dummy_log_string = "LOGTHIS_SECRET_314 ";
+import "Testsuite";
 
-/**
- * @param INPUT a tuple of read, write and execute maps
- * @param DEFAULT default read value
- * @return list of various SCR return values
- */
-define list TESTSUITE_INIT (list<any> INPUT, any DEFAULT) ``{
-
-    any default = $[];
-
-    any read = INPUT[0]: default;
-    any write = INPUT[1]: default;
-    any exec = INPUT[2]: default;
-
-    y2debug ("READ=%1", read);
-    y2debug ("WRITE=%1", write);
-    y2debug ("EXECUTE=%1", exec);
-    y2debug ("DEFAULT=%1", DEFAULT);
-
-    // initialize
-    list ret = [];
-    ret = add (ret, SCR::UnregisterAllAgents ());
-    ret = add (ret, SCR::RegisterAgent (., `ag_dummy(`DataMap(read, write,exec,DEFAULT))));
-    y2debug ("ret=%1", ret);
-
-    return ret;
+define list TESTSUITE_INIT (list<any> INPUT, any DEFAULT) {
+    return Testsuite::Init(INPUT, DEFAULT);
 }
 
-/**
- * @param FUNCTION a single or deep quoted term
- * @param INPUT a tuple of read, write and execute maps
- * @param DEFAULT default read value
- * @return whatever the FUNCTION returns
- */
-define any TEST (any FUNCTION, list<any> INPUT, any DEFAULT) ``{
-
-    y2debug ("FUNCTION=%1", FUNCTION);
-
-    TESTSUITE_INIT (INPUT, DEFAULT);
-
-    any real_ret = eval (FUNCTION);
-
-    y2debug ("%1Return\t%2", dummy_log_string, real_ret);
-
-    return real_ret;
+define any TEST (any FUNCTION, list<any> INPUT, any DEFAULT) {
+    return Testsuite::Test(FUNCTION, INPUT, DEFAULT);
 }
 
-/**
- * @param output whatever to be dumped into the log
- */
-define void DUMP (any output) ``{
-    string out = sformat ("%1", output);
-    list<string> lines = splitstring (out, "\n");
-    maplist (string l, lines, ``{
-	return y2debug ("%1Dump\t%2", dummy_log_string, l);
-    });
-    if(size(lines) < 1)
-	y2debug ("%1Dump\t%2", dummy_log_string, out);
+define void DUMP (any output) {
+    return Testsuite::Dump (output);
 }
 
-/**
- * @param filename file to be dumped
- */
-define void DUMPFILE (string filename) ``{
-
-    string command = sformat("/bin/cat \"%1\" | sed \"s/^/%2File\t/\"",
-	    filename, dummy_log_string);
-
-    SCR::RegisterAgent (.target, "/usr/share/YaST2/scrconf/target.scr");
-    map res = (map) SCR::Execute (.target.bash_output, command);
-    SCR::UnregisterAllAgents ();
-
-    string out = lookup (res, "stdout", " (nil)");
-    list<string> lines = splitstring (out, "\n");
-    maplist (string l, lines, ``{
-	return y2debug ("%1", l);
-    });
-    if(size(lines) < 1)
-	y2debug ("%1File\t%2", dummy_log_string, out);
+define void DUMPFILE (string filename) {
+    return Testsuite::DumpFile (filename);
 }
 
 /* EOF */
