@@ -1,14 +1,9 @@
 #
 # Makefile.am for testsuite/skel
-# $Id$
 #
 
-olddatadir = /usr/lib/YaST2/testsuite
 datadir = @ydatadir@/testsuite
 skeldir = @ydatadir@/testsuite/skel
-
-olddata_DATA =			\
-	Makefile.testsuite
 
 data_DATA =			\
 	Makefile.testsuite
@@ -22,4 +17,4 @@ skel_DATA =			\
 	testsuite.exp		\
 	runtest.sh
 
-EXTRA_DIST = $(data_DATA) $(skel_DATA) $(olddata_DATA)
+EXTRA_DIST = $(data_DATA) $(skel_DATA)
