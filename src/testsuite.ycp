@@ -9,13 +9,30 @@
 
 {
 
-global define UI::GetDisplayInfo () ``{ return $[]; }
-global define UI::HasSpecialWidget (any x) ``{ return false; }
-global define ui_defines () ``{ };
+// UI FAKES BEGIN ---------
+/**
+ * Fake. Used when a constructor we don't control calls UI
+ * @return empty dummy value
+ */
+global define map UI::GetDisplayInfo () ``{ return $[]; }
+/**
+ * Fake. Used when a constructor we don't control calls UI
+ * @param x whatever
+ * @return false
+ */
+global define boolean UI::HasSpecialWidget (any x) ``{ return false; }
+/**
+ * Fake. Used when a constructor we don't control calls UI
+ */
+global define void ui_defines () ``{ };
+// UI FAKES END ---------
 
 /**
+ * @param INPUT a tuple of read, write and execute maps
+ * @param DEFAULT default read value
+ * @return list of various SCR return values
  */
-global define TESTSUITE_INIT (list INPUT, any DEFAULT) ``{
+global define list TESTSUITE_INIT (list INPUT, any DEFAULT) ``{
 
     string read = sformat ("%1", select (INPUT, 0, $[]));
     string write = sformat ("%1", select (INPUT, 1, $[]));
@@ -51,8 +68,12 @@ global define TESTSUITE_INIT (list INPUT, any DEFAULT) ``{
 }
 
 /**
+ * @param FUNCTION a single or deep quoted term
+ * @param INPUT a tuple of read, write and execute maps
+ * @param DEFAULT default read value
+ * @return whatever the FUNCTION returns
  */
-global define TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
+global define any TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
 
     y2debug ("FUNCTION=%1", FUNCTION);
 
@@ -75,16 +96,18 @@ global define TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
 }
 
 /**
+ * @param output whatever to be dumped into the log
  */
-global define DUMP (any output) ``{
+global define void DUMP (any output) ``{
     string out = sformat ("%1", output);
     list lines = splitstring (out, "\n");
     maplist (`l, lines, ``{ return y2debug ("aNY_OutPuT=%1", l); });
 }
 
 /**
+ * @param filename file to be dumped
  */
-global define DUMPFILE (string filename) ``{
+global define void DUMPFILE (string filename) ``{
     string command = "/bin/cat " + filename + " | sed \"s/^/fIlE_OutPuT=/\"";
 
     SCR::RegisterAgent (.target, "/usr/share/YaST2/scrconf/target.scr");

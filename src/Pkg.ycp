@@ -77,6 +77,8 @@
 
     /**
      * Faked WFM::Pkg::IsAvailable
+     * @param p package
+     * @return availability
      */
     global define boolean IsAvailable (string p) ``{
 	return FAKE_FUNCTION1 (true, `IsAvailable, p);
@@ -84,6 +86,8 @@
 
     /**
      * Faked WFM::Pkg::IsProvided
+     * @param p package
+     * @return availability
      */
     global define boolean IsProvided (string p) ``{
 	return FAKE_FUNCTION1 (true, `IsProvided, p);
@@ -91,9 +95,93 @@
 
     /**
      * Faked WFM::Pkg::SourceProductData
+     * @param i whatever
+     * @return empty return value
      */
     global define map SourceProductData (integer i) ``{
 	return $[];
+    }
+
+    /**
+     * Faked WFM::Pkg::SourceStartCache
+     * (Used in PackageCallbacks constructor)
+     * @param b whatever
+     * @return empty return value
+     */
+    global define list SourceStartCache (boolean b) ``{
+	return [];
+    }
+
+    /**
+     * Faked WFM::Pkg::CallbackStartProvide
+     * (Used in PackageCallbacks constructor)
+     * @param s function name
+     */
+    global define void CallbackStartProvide (string s) ``{
+	return;
+    }
+
+    /**
+     * Faked WFM::Pkg::CallbackProgressProvide
+     * (Used in PackageCallbacks constructor)
+     * @param s function name
+     */
+    global define void CallbackProgressProvide (string s) ``{
+	return;
+    }
+
+    /**
+     * Faked WFM::Pkg::CallbackDoneProvide
+     * (Used in PackageCallbacks constructor)
+     * @param s function name
+     */
+    global define void CallbackDoneProvide (string s) ``{
+	return;
+    }
+
+    /**
+     * Faked WFM::Pkg::CallbackStartPackage
+     * (Used in PackageCallbacks constructor)
+     * @param s function name
+     */
+    global define void CallbackStartPackage (string s) ``{
+	return;
+    }
+
+    /**
+     * Faked WFM::Pkg::CallbackProgressPackage
+     * (Used in PackageCallbacks constructor)
+     * @param s function name
+     */
+    global define void CallbackProgressPackage (string s) ``{
+	return;
+    }
+
+    /**
+     * Faked WFM::Pkg::CallbackDonePackage
+     * (Used in PackageCallbacks constructor)
+     * @param s function name
+     */
+    global define void CallbackDonePackage (string s) ``{
+	return;
+    }
+
+    /**
+     * Faked WFM::Pkg::SourceGetCurrent
+     * (Used in PackageCallbacks constructor)
+     * @return empty return value
+     */
+    global define list SourceGetCurrent () ``{
+	return [];
+    }
+
+    /**
+     * Faked WFM::Pkg::SourceChange
+     * (Used in PackageCallbacks constructor)
+     * @param s whatever
+     */
+    global define void SourceChange (string s) ``{
+	return;
     }
 
 }
