@@ -47,7 +47,7 @@ proc testsuite-run { src } {
   set tmperr_name "tmp.err.$base_name"
   set tmplog_name "tmp.log.$base_name"
 
-  puts "Running $base_name..."
+  puts "Running $base_name ..."
 
   # run the test
 
