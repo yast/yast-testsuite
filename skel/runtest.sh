@@ -39,7 +39,7 @@ parse() {
     #components="\[ag_dummy\]|\[bash\]"
     components="\[ag_dummy\]|\[agent-dummy\]"
     ycp="\[YCP\].*(rEaL_rEt=|aNY_OutPuT=|LoGlOg=|fIlE_OutPuT=)"
-    cat "$file" | grep -v "checkPath" | grep -v "Exit status is " | sed "$sed1" |grep -E "<[012]>[^\[]*($ycp|$components)" | cut -d" " -f7- | sed -e 's/rEaL_rEt=/Return	/' | sed -e 's/aNY_OutPuT=/Dump	/' | sed -e 's/fIlE_OutPuT=/File	/' | sed -e 's/LoGlOg=/Log	/'
+    cat "$file" | grep -v "checkPath" | grep -v "Exit status is " | grep -v "dummy.*Y2AgentComponent.*evaluate" | sed "$sed1" |grep -E "<[012]>[^\[]*($ycp|$components)" | cut -d" " -f7- | sed -e 's/rEaL_rEt=/Return	/' | sed -e 's/aNY_OutPuT=/Dump	/' | sed -e 's/fIlE_OutPuT=/File	/' | sed -e 's/LoGlOg=/Log	/'
     cat "$file" | grep "<[345]>" | grep -v "\[YCP\]" >&2
   else
     echo "Y2TESTSUITE set to \"$Y2TESTSUITE\""
