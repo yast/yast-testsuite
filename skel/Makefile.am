@@ -1,12 +1,12 @@
-#
 # Makefile.am for testsuite/skel
-#
+# $Id$
 
 datadir = @ydatadir@/testsuite
 skeldir = @ydatadir@/testsuite/skel
 
 data_DATA =			\
-	Makefile.testsuite
+	Makefile.testsuite	\
+	log.conf
 
 skel_DATA =			\
 	default.exp		\
