@@ -1,6 +1,6 @@
 /**
- * File:	Pkg.ycp
- * Module:	Testsuite
+ * File:	modules/Pkg.ycp
+ * Package:	Testsuite
  * Summary:	Replacement for Pkg:: (yast2-core/wfm)
  * Authors:	Martin Vidner <mvidner@suse.cz>
  *
@@ -27,6 +27,7 @@
  */
 
 {
+
     module "Pkg";
 
     /**
