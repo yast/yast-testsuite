@@ -77,13 +77,13 @@ global define any TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
 
     y2debug ("FUNCTION=%1", FUNCTION);
 
-    string quote = substring (sformat ("%1", FUNCTION), 0, 1);
-    y2debug ("quote=%1", quote);
+    string quotesign = substring (sformat ("%1", FUNCTION), 0, 1);
+    y2debug ("quotesign=%1", quotesign);
 
     TESTSUITE_INIT (INPUT, DEFAULT);
 
     any real_ret = nil;
-    if (quote == "`")
+    if (quotesign == "`")
 	real_ret = WFM::CallFunction (FUNCTION);
     else
 	real_ret = eval (FUNCTION);
