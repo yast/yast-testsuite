@@ -8,10 +8,10 @@ skeldir=$(maindir)/skel
 
 testsuite_dirs=$(srcdir)/run $(srcdir)/config $(srcdir)/$(RPMNAME).test
 
-files_config=config/default.exp config/unix.exp config/unknown.exp
-files_run=run/runtest.sh
-files_test=$(RPMNAME).test/testsuite.exp
-files_tmpl=Makefile.am .cvsignore
+files_config=$(srcdir)/config/default.exp $(srcdir)/config/unix.exp $(srcdir)/config/unknown.exp
+files_run=$(srcdir)/run/runtest.sh
+files_test=$(srcdir)/$(RPMNAME).test/testsuite.exp
+files_tmpl=$(srcdir)/Makefile.am $(srcdir)/.cvsignore
 files_all=$(files_config) $(files_test) $(files_tmpl) $(files_run)
 
 all: dirs files
@@ -24,20 +24,20 @@ dirs:
 # Overwrite the tested package's testsuite/Makefile.am only
 # if the template file is newer in content (which shouldn't
 # happen as it is only a proxy). Prevents automake mismatch errors.
-Makefile.am: $(skeldir)/Makefile_am
+$(srcdir)/Makefile.am: $(skeldir)/Makefile_am
 	cmp -s $< $@ || cp -f $< $@
 
-.cvsignore: $(skeldir)/_cvsignore
+$(srcdir)/.cvsignore: $(skeldir)/_cvsignore
 	cp -f $< $@
 
-run/runtest.sh: $(skeldir)/runtest.sh
+$(srcdir)/run/runtest.sh: $(skeldir)/runtest.sh
 	cp -f $< $@
 	chmod +x $@
 
-config/%: $(skeldir)/%
+$(srcdir)/config/%: $(skeldir)/%
 	cp -f $< $@
 
-$(RPMNAME).test/%: $(skeldir)/%
+$(srcdir)/$(RPMNAME).test/%: $(skeldir)/%
 	cp -f $< $@
 
 prepare:
