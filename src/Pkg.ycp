@@ -176,11 +176,11 @@
     }
 
     /**
-     * Faked WFM::Pkg::SourceChange
+     * Faked WFM::Pkg::CallbackSourceChange
      * (Used in PackageCallbacks constructor)
      * @param s whatever
      */
-    global define void SourceChange (string s) ``{
+    global define void CallbackSourceChange (string s) ``{
 	return;
     }
 
