@@ -1,5 +1,6 @@
 @HEADER-COMMENT@
-# neededforbuild yast2 yast2-core yast2-core-devel yast2-devtools
+
+# neededforbuild  yast2 yast2-core yast2-core-devel yast2-devtools
 
 @HEADER@
 Requires:	yast2 expect dejagnu yast2-core-devel
@@ -12,9 +13,9 @@ BuildArchitectures: noarch
 
 @PREP@
 
-@BUILD-YCP@
+@BUILD@
 
-@INSTALL-YCP@
+@INSTALL@
 
 @CLEAN@
 
