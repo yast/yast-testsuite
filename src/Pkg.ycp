@@ -185,4 +185,8 @@
 	return;
     }
 
+    global define string GetLocale () ``{
+	return "en_US";
+    }
+
 }
