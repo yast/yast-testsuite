@@ -20,3 +20,4 @@ stamp-h.in
 install-sh
 missing
 mkinstalldirs
+Makefile.am.common
