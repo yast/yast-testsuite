@@ -189,4 +189,12 @@
 	return "en_US";
     }
 
+    global define list TargetProduct() ``{
+	return [];
+    }
+
+    global define boolean TargetInit(string s, boolean b) ``{
+	return true;
+    }
+
 }
