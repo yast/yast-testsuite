@@ -63,7 +63,7 @@ global define TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
 
     any real_ret = nil;
     if (quote == "`")
-        real_ret = CallFunction (FUNCTION);
+        real_ret = WFM::CallFunction (FUNCTION);
     else
         real_ret = eval (FUNCTION);
 
