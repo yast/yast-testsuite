@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jan 30 12:41:18 CET 2004 - msvec@suse.cz
+
+- log also the empty lines (and files) in DUMP and DUMPFILE
+- 2.9.4
+
+-------------------------------------------------------------------
 Fri Jan 23 15:56:29 CET 2004 - msvec@suse.cz
 
 - take advantage of a custom log.conf

@@ -69,6 +69,8 @@ define void DUMP (any output) ``{
     maplist (string l, lines, ``{
 	return y2debug ("%1Dump\t%2", dummy_log_string, l);
     });
+    if(size(lines) < 1)
+	y2debug ("%1Dump\t%2", dummy_log_string, out);
 }
 
 /**
@@ -85,7 +87,11 @@ define void DUMPFILE (string filename) ``{
 
     string out = lookup (res, "stdout", " (nil)");
     list<string> lines = splitstring (out, "\n");
-    maplist (string l, lines, ``{ return y2debug ("%1", l); });
+    maplist (string l, lines, ``{
+	return y2debug ("%1", l);
+    });
+    if(size(lines) < 1)
+	y2debug ("%1File\t%2", dummy_log_string, out);
 }
 
 /* EOF */

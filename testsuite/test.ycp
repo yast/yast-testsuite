@@ -36,10 +36,14 @@ TEST(``(testfunc()), [ READ, WRITE, EXEC ], nil); //DEFAULT);
 
 y2error("error_string");
 
+DUMP("");
+DUMP(nil);
+
 DUMP(731);
 DUMP("dump_string");
 DUMP("dump_string1\ndump_string2");
 DUMPFILE("dump_file");
+DUMPFILE("/dev/null");
 
 DUMP("Pkg:: testing");
 define string pkg_testfunc () ``{
