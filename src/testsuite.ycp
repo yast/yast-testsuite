@@ -1,7 +1,7 @@
 /**
- * File:	testsuite.ycp
- * Module:	Testsuite
- * Summary:	Testsuite include
+ * File:	include/testsuite.ycp
+ * Package:	Testsuite
+ * Summary:	Main testsuite include
  * Authors:	Michal Svec <msvec@suse.cz>
  *
  * $Id$
