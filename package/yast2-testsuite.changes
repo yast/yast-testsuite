@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun 14 14:19:43 CEST 2004 - msvec@suse.cz
+
+- added Testsuite module
+- 2.10.0
+
+-------------------------------------------------------------------
 Sat Apr  3 18:57:38 CEST 2004 - kkaempf@suse.de
 
 - filter [Y2PMrc] messages from logfile (#38235)
