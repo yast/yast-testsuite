@@ -50,7 +50,7 @@ parse() {
 }
 
 #( y2base -l /dev/fd/1 "$1" scr 2>&1 ) | parse >"$2" 2>"$3"
-( y2base -l - "$1" scr 2>&1 ) | parse >"$2" 2>"$3"
+( y2base -l - "$1" testsuite 2>&1 ) | parse >"$2" 2>"$3"
 
 retcode="$PIPESTATUS"
 if [ "$retcode" -gt 0 ]; then
