@@ -189,7 +189,7 @@
 	return "en_US";
     }
 
-    global define list TargetProduct() ``{
+    global define list TargetProducts() ``{
 	return [];
     }
 
