@@ -1,4 +1,4 @@
-# Makefile.am for .../doc
+# Makefile.am for testsuite/doc
 
 htmldir = @docdir@
 
