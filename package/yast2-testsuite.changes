@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Feb  5 11:06:08 CET 2003 - lslezak@suse.cz
+
+- added TargetInit and TargetProducts into Pkg.ycp
+- version 2.7.7
+
+-------------------------------------------------------------------
 Mon Jan 27 16:11:52 CET 2003 - arvin@suse.de
 
 - added popt to neededforbuild
