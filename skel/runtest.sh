@@ -65,12 +65,16 @@ parse() {
   file="`mktemp /tmp/yast2-test.XXXXXX`"
   cat >"$file"
   if [ -z "$Y2TESTSUITE" ]; then
-    sed1="s/ <[2-5]> [^ ]\+ \[YCP\] \([^ ]\+\) / <0> host [YCP] \1 ${DUMMY_LOG_STRING}Log	/"
+    # errors are OK if they come from YCP (or Perl, #41448),
+    # mark them for output
+    sed1="s/ <[2-5]> [^ ]\+ \[\(YCP\|Perl\)\] \([^ ]\+\) / <0> host [YCP] \2 ${DUMMY_LOG_STRING}Log	/"
+    # leave only essential info
     sed2="s/^.*$DUMMY_LOG_STRING//g"
     ycp="\[YCP\].*$DUMMY_LOG_STRING"
     components="(agent-dummy|YCP)"
     cat "$file" | sed "$sed1" | grep -E "<[012]>[^]]*$components.*$regex.*$DUMMY_LOG_STRING" | sed "$sed2" # | cut -d" " -f7-
-    cat "$file" | grep "<[345]>" | grep -v "\[YCP\]" | grep -v "\[Y2PMrc\]" >&2
+    # Y2PMrc: #38235
+    cat "$file" | grep "<[345]>" | grep -v "\[\(YCP\|Perl\|Y2PMrc\)\]" >&2
   else
     echo "Y2TESTSUITE set to \"$Y2TESTSUITE\""
     echo
