@@ -41,10 +41,10 @@ DUMMY_LOG_STRING="LOGTHIS_SECRET_314 "
 
 files="$(grep '^[/* 	]*testedfiles:' "$1"|sed "s/.*testedfiles:[ 	]*//g")"
 if [ "$files" ]; then
-  echo "$files" > /tmp/RRG
-  regex=" (testsuite\.ycp|$(echo "$files"|sed 's|\.|\\.|g')):"
+  echo "$files" >> testsuite.log
+  regex=" (testsuite\.ycp|$(echo "$files"|sed 's|\.|\\.|g'|sed 's| |\||g')):"
 fi
-echo "$regex" >> /tmp/RRG
+echo "$regex" >> testsuite.log
 
 parse() {
   file="`mktemp /tmp/yast2-test.XXXXXX`"
