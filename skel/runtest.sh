@@ -33,6 +33,10 @@ export Y2ALLGLOBAL=1
 export PATH="$PATH:/usr/lib/YaST2/bin"
 logconf="/usr/share/YaST2/data/testsuite/log.conf"
 
+if [ ! -f "$logconf" ]; then
+  logconf="../skel/log.conf"
+fi
+
 DUMMY_LOG_STRING="LOGTHIS_SECRET_314 "
 
 parse() {
