@@ -63,9 +63,9 @@ global define TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
 
     any real_ret = nil;
     if (quote == "`")
-        real_ret = WFM::CallFunction (FUNCTION);
+	real_ret = WFM::CallFunction (FUNCTION);
     else
-        real_ret = eval (FUNCTION);
+	real_ret = eval (FUNCTION);
 
     y2debug ("rEaL_rEt=%1", real_ret);
 
