@@ -1,10 +1,12 @@
-#
 # Makefile for testsuite
 # $Id$
-#
 
 maindir=/usr/share/YaST2/data/testsuite
 skeldir=$(maindir)/skel
+
+ifeq ($(srcdir),)
+srcdir = .
+endif
 
 testsuite_dirs=$(srcdir)/run $(srcdir)/config $(srcdir)/$(RPMNAME).test
 
