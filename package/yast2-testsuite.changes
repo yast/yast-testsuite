@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Feb 28 19:18:20 CET 2004 - kkaempf@suse.de
+
+- add openslp, openslp-devel to neededforbuild
+- 2.9.7
+
+-------------------------------------------------------------------
 Wed Feb 25 02:23:29 CET 2004 - msvec@suse.cz
 
 - fixed files filtering (support files with path)
