@@ -24,11 +24,14 @@ unset LC_MEASUREMENT
 unset LC_IDENTIFICATION
 unset LC_ALL
 
-export Y2DEBUG=1
-export Y2DEBUGALL=1
+unset Y2DEBUG
+unset Y2DEBUGALL
+# export Y2DEBUG=1
+# export Y2DEBUGALL=1
 export Y2ALLGLOBAL=1
 
 export PATH="$PATH:/usr/lib/YaST2/bin"
+logconf="/usr/share/YaST2/data/testsuite/log.conf"
 
 DUMMY_LOG_STRING="LOGTHIS_SECRET_314 "
 
@@ -51,7 +54,7 @@ parse() {
 }
 
 #( y2base -l /dev/fd/1 "$1" scr 2>&1 ) | parse >"$2" 2>"$3"
-( y2base -l - "$1" testsuite 2>&1 ) | parse >"$2" 2>"$3"
+( y2base -l - -c "$logconf" "$1" testsuite 2>&1 ) | parse >"$2" 2>"$3"
 
 retcode="$PIPESTATUS"
 if [ "$retcode" -gt 0 ]; then
