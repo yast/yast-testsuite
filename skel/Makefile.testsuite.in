@@ -1,7 +1,8 @@
 # Makefile for testsuite
 # $Id$
 
-maindir=/usr/share/YaST2/data/testsuite
+prefix=@prefix@
+maindir=@ydatadir@/testsuite
 skeldir=$(maindir)/skel
 
 ifeq ($(srcdir),)

@@ -9,4 +9,5 @@
 @YAST2-CHECKS-YCP@
 
 ## and generate the output...
+AC_OUTPUT([skel/Makefile.testsuite])
 @YAST2-OUTPUT@

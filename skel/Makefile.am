@@ -17,4 +17,4 @@ skel_DATA =			\
 	testsuite.exp		\
 	runtest.sh
 
-EXTRA_DIST = $(data_DATA) $(skel_DATA)
+EXTRA_DIST = Makefile.testsuite.in log.conf $(skel_DATA)
