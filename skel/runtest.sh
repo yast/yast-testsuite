@@ -39,15 +39,22 @@ fi
 
 DUMMY_LOG_STRING="LOGTHIS_SECRET_314 "
 
+files="$(grep '^[/* 	]*testedfiles:' "$1"|sed "s/.*testedfiles:[ 	]*//g")"
+if [ "$files" ]; then
+  echo "$files" > /tmp/RRG
+  regex=" (testsuite\.ycp|$(echo "$files"|sed 's|\.|\\.|g')):"
+fi
+echo "$regex" >> /tmp/RRG
+
 parse() {
   file="`mktemp /tmp/yast2-test.XXXXXX`"
   cat >"$file"
   if [ -z "$Y2TESTSUITE" ]; then
-    sed1="s/ <[2-5]> [^ ]\+ \[YCP\] [^ ]\+ / <0> host [YCP] file ${DUMMY_LOG_STRING}Log	/"
+    sed1="s/ <[2-5]> [^ ]\+ \[YCP\] \([^ ]\+\) / <0> host [YCP] \1 ${DUMMY_LOG_STRING}Log	/"
     sed2="s/^.*$DUMMY_LOG_STRING//g"
     ycp="\[YCP\].*$DUMMY_LOG_STRING"
     components="(agent-dummy|YCP)"
-    cat "$file" | sed "$sed1" | grep -E "<[012]>[^]]*$components.*$DUMMY_LOG_STRING" | sed "$sed2" # | cut -d" " -f7-
+    cat "$file" | sed "$sed1" | grep -E "<[012]>[^]]*$components.*$regex.*$DUMMY_LOG_STRING" | sed "$sed2" # | cut -d" " -f7-
     cat "$file" | grep "<[345]>" | grep -v "\[YCP\]" >&2
   else
     echo "Y2TESTSUITE set to \"$Y2TESTSUITE\""
