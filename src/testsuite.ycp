@@ -28,6 +28,38 @@ global define void ui_defines () ``{ };
 // UI FAKES END ---------
 
 /**
+ * The normal live scr.
+ */
+global integer TESTSUITE_SCR_LIVE = nil;
+/**
+ * A scr where the dummy agent is mounted.
+ * Activated by TESTSUITE_INIT, deactivated by TESTSUITE_CLEAN.
+ * Both are done in TEST.
+ */
+global integer TESTSUITE_SCR_DUMMY = nil;
+/**
+ * If non-nil, it holds the name of a temporary .scr file that will be
+ * deleted by @ref TESTSUITE_CLEAN .
+ */
+global string TESTSUITE_TMPFILE = nil;
+
+/**
+ * Ensure that we have both scrs
+ */
+global define list TESTSUITE_TWO_SCRS () ``{
+    list ret = [];
+    if (TESTSUITE_SCR_LIVE == nil)
+    {
+	// first call, save the default live SCR
+	TESTSUITE_SCR_LIVE = WFM::SCRGetDefault ();
+	ret = add (ret, TESTSUITE_SCR_LIVE);
+	TESTSUITE_SCR_DUMMY = WFM::SCROpen ("scr", true);
+	ret = add (ret, TESTSUITE_SCR_DUMMY);
+    }
+    return ret;
+}
+
+/**
  * @param INPUT a tuple of read, write and execute maps
  * @param DEFAULT default read value
  * @return list of various SCR return values
@@ -45,26 +77,50 @@ global define list TESTSUITE_INIT (list INPUT, any DEFAULT) ``{
     y2debug ("EXECUTE=%1", exec);
     y2debug ("DEFAULT=%1", DEFAULT);
 
-    list ret = [];
-    ret = add (ret, SCR::RegisterAgent (.target, "/usr/share/YaST2/scrconf/target.scr"));
+    // initialize
+    list ret = TESTSUITE_TWO_SCRS ();
+
+    // switch to the live SCR and clear the leftover file
+    ret = add (ret, TESTSUITE_CLEAN ());
+
+    // prepare a .scr file for the dummy agent
 
     string tmpdir = SCR::Read (.target.tmpdir);
     if (tmpdir==nil || tmpdir=="") tmpdir="/tmp";
 
-    string tmpfile = tmpdir + "_" + "dummy.scr";
-    y2debug ("tmpfile=%1", tmpfile);
+    // create the file inside the directory
+    TESTSUITE_TMPFILE = tmpdir + "/" + "dummy.scr";
+    y2debug ("tmpfile=%1", TESTSUITE_TMPFILE);
 
     string scrfile = ".\n\n`ag_dummy (DataMap (\n  " + read;
     scrfile = scrfile + ", \n" + write + ", \n" + exec;
     scrfile = scrfile + ", \n" + default + "\n))\n";
     y2debug ("scrfile=%1", scrfile);
 
-    ret = add (ret, SCR::Write (.target.string, tmpfile, scrfile));
+    ret = add (ret, SCR::Write (.target.string, TESTSUITE_TMPFILE, scrfile));
+
+    // switch to the dummy SCR and mount the test data
+    WFM::SCRSetDefault (TESTSUITE_SCR_DUMMY);
     ret = add (ret, SCR::UnregisterAllAgents ());
-    ret = add (ret, SCR::RegisterAgent (., tmpfile));
+    ret = add (ret, SCR::RegisterAgent (., TESTSUITE_TMPFILE));
     y2debug ("ret=%1", ret);
 
     return ret;
+}
+
+global define boolean TESTSUITE_CLEAN () ``{
+    WFM::SCRSetDefault (TESTSUITE_SCR_LIVE);
+
+    if (TESTSUITE_TMPFILE == nil)
+    {
+	return true;
+    }
+    else
+    {
+	boolean ret = SCR::Execute (.target.remove, TESTSUITE_TMPFILE);
+	TESTSUITE_TMPFILE = nil;
+	return ret;
+    }
 }
 
 /**
@@ -90,7 +146,7 @@ global define any TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
 
     y2debug ("rEaL_rEt=%1", real_ret);
 
-    SCR::UnregisterAllAgents ();
+    TESTSUITE_CLEAN ();
 
     return real_ret;
 }
@@ -108,11 +164,13 @@ global define void DUMP (any output) ``{
  * @param filename file to be dumped
  */
 global define void DUMPFILE (string filename) ``{
+    // initialize, in case this is the first call
+    TESTSUITE_TWO_SCRS ();
+    WFM::SCRSetDefault (TESTSUITE_SCR_LIVE);
+
     string command = "/bin/cat " + filename + " | sed \"s/^/fIlE_OutPuT=/\"";
 
-    SCR::RegisterAgent (.target, "/usr/share/YaST2/scrconf/target.scr");
     map res = SCR::Execute (.target.bash_output, command);
-    SCR::UnregisterAllAgents ();
 
     string out = lookup (res, "stdout", " (nil)");
     list lines = splitstring (out, "\n");
