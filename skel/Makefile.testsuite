@@ -21,8 +21,11 @@ files: $(files_all)
 dirs:
 	mkdir -p $(testsuite_dirs) $(srcdir)/tests
 
+# Overwrite the tested package's testsuite/Makefile.am only
+# if the template file is newer in content (which shouldn't
+# happen as it is only a proxy). Prevents automake mismatch errors.
 Makefile.am: $(skeldir)/Makefile_am
-	cp -f $< $@
+	cmp -s $< $@ || cp -f $< $@
 
 .cvsignore: $(skeldir)/_cvsignore
 	cp -f $< $@
