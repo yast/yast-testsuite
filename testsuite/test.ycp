@@ -19,12 +19,12 @@
 include "./../src/testsuite.ycp";
 
 map READ = $[ "read" : $[ "path" : "read_result" ] ];
-map WRITE = $[ "write" : $[ "path" : "write_result" ] ];
+map WRITE = $[ "write" : $[ "path" : true ] ];
 map EXEC = $[ "execute" : $[ "path" : "execute_result" ] ];
 
 //string DEFAULT = "default_string";
 
-global define testfunc() ``{
+define string testfunc() ``{
     SCR::Dir(.read);
     SCR::Read(.read.path);
     SCR::Write(.write.path, "write_arg");
@@ -42,7 +42,7 @@ DUMP("dump_string1\ndump_string2");
 DUMPFILE("dump_file");
 
 DUMP("Pkg:: testing");
-global define string pkg_testfunc () ``{
+define string pkg_testfunc () ``{
     if (Pkg::IsProvided ("sendmail"))
     {
 	return "sendmail";
@@ -59,13 +59,13 @@ global define string pkg_testfunc () ``{
 
 import "Pkg";
 
-Pkg::FAKE (`IsProvided, true);
+// Pkg::FAKE (`IsProvided, true);
 TEST(``(pkg_testfunc ()), [], nil);
 
-Pkg::FAKE (`IsProvided, false);
+//Pkg::FAKE (`IsProvided, false);
 TEST(``(pkg_testfunc ()), [], nil);
 
-Pkg::FAKE (`IsProvided, $["sendmail": false, "postfix": true]);
+//Pkg::FAKE (`IsProvided, $["sendmail": false, "postfix": true]);
 TEST(``(pkg_testfunc ()), [], nil);
 
 }

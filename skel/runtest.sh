@@ -29,7 +29,6 @@ export Y2DEBUGALL=1
 export Y2ALLGLOBAL=1
 
 export PATH="$PATH:/usr/lib/YaST2/bin"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/YaST2/lib"
 
 DUMMY_LOG_STRING="LOGTHIS_SECRET_314 "
 
