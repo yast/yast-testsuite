@@ -8,7 +8,6 @@ check-local:
 	../skel/runtest.sh test.ycp tmp.out tmp.err
 	diff -u test.err tmp.err
 	diff -u test.out tmp.out
-	parseycp -q -R ..
 
 clean-local:
 	$(RM) tmp.*

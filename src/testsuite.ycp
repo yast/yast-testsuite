@@ -9,75 +9,22 @@
 
 {
 
-// UI FAKES BEGIN ---------
-/**
- * Fake. Used when a constructor we don't control calls UI
- * @return empty dummy value
- */
-global define map UI::GetDisplayInfo () ``{ return $[]; }
-/**
- * Fake. Used when a constructor we don't control calls UI
- * @param x whatever
- * @return false
- */
-global define boolean UI::HasSpecialWidget (any x) ``{ return false; }
-/**
- * Fake. Used when a constructor we don't control calls UI
- */
-global define void ui_defines () ``{ };
-// UI FAKES END ---------
-
-/**
- * The normal live scr.
- */
-global integer TESTSUITE_SCR_LIVE = nil;
-
-/**
- * A scr where the dummy agent is mounted.
- * Activated by TESTSUITE_INIT, deactivated by TESTSUITE_CLEAN.
- * Both are done in TEST.
- */
-global integer TESTSUITE_SCR_DUMMY = nil;
-
-/**
- * If non-nil, it holds the name of a temporary .scr file that will be
- * deleted by @ref TESTSUITE_CLEAN .
- */
-global string TESTSUITE_TMPFILE = nil;
-
 /**
  * Secret string :-)
  */
-global string dummy_log_string = "LOGTHIS_SECRET_314 ";
-
-/**
- * Ensure that we have both scrs
- */
-global define list TESTSUITE_TWO_SCRS () ``{
-    list ret = [];
-    if (TESTSUITE_SCR_LIVE == nil)
-    {
-	// first call, save the default live SCR
-	TESTSUITE_SCR_LIVE = WFM::SCRGetDefault ();
-	ret = add (ret, TESTSUITE_SCR_LIVE);
-	TESTSUITE_SCR_DUMMY = WFM::SCROpen ("scr", true);
-	ret = add (ret, TESTSUITE_SCR_DUMMY);
-    }
-    return ret;
-}
+string dummy_log_string = "LOGTHIS_SECRET_314 ";
 
 /**
  * @param INPUT a tuple of read, write and execute maps
  * @param DEFAULT default read value
  * @return list of various SCR return values
  */
-global define list TESTSUITE_INIT (list INPUT, any DEFAULT) ``{
+define list TESTSUITE_INIT (list INPUT, any DEFAULT) ``{
 
-    string read = sformat ("%1", select (INPUT, 0, $[]));
-    string write = sformat ("%1", select (INPUT, 1, $[]));
-    string exec = sformat ("%1", select (INPUT, 2, $[]));
+    map read = INPUT[0]: $[];
+    map write = INPUT[1]: $[];
+    map exec = INPUT[2]: $[];
 
-    string default = sformat ("%1", DEFAULT);
 
     y2debug ("READ=%1", read);
     y2debug ("WRITE=%1", write);
@@ -85,49 +32,12 @@ global define list TESTSUITE_INIT (list INPUT, any DEFAULT) ``{
     y2debug ("DEFAULT=%1", DEFAULT);
 
     // initialize
-    list ret = TESTSUITE_TWO_SCRS ();
-
-    // switch to the live SCR and clear the leftover file
-    ret = add (ret, TESTSUITE_CLEAN ());
-
-    // prepare a .scr file for the dummy agent
-
-    string tmpdir = SCR::Read (.target.tmpdir);
-    if (tmpdir==nil || tmpdir=="") tmpdir="/tmp";
-
-    // create the file inside the directory
-    TESTSUITE_TMPFILE = tmpdir + "/" + "dummy.scr";
-    y2debug ("tmpfile=%1", TESTSUITE_TMPFILE);
-
-    string scrfile = ".\n\n`ag_dummy (DataMap (\n  " + read;
-    scrfile = scrfile + ", \n" + write + ", \n" + exec;
-    scrfile = scrfile + ", \n" + default + "\n))\n";
-    y2debug ("scrfile=%1", scrfile);
-
-    ret = add (ret, SCR::Write (.target.string, TESTSUITE_TMPFILE, scrfile));
-
-    // switch to the dummy SCR and mount the test data
-    WFM::SCRSetDefault (TESTSUITE_SCR_DUMMY);
+    list ret = [];
     ret = add (ret, SCR::UnregisterAllAgents ());
-    ret = add (ret, SCR::RegisterAgent (., TESTSUITE_TMPFILE));
+    ret = add (ret, SCR::RegisterAgent (., `ag_dummy(`DataMap(read, write,exec,DEFAULT))));
     y2debug ("ret=%1", ret);
 
     return ret;
-}
-
-global define boolean TESTSUITE_CLEAN () ``{
-    WFM::SCRSetDefault (TESTSUITE_SCR_LIVE);
-
-    if (TESTSUITE_TMPFILE == nil)
-    {
-	return true;
-    }
-    else
-    {
-	boolean ret = SCR::Execute (.target.remove, TESTSUITE_TMPFILE);
-	TESTSUITE_TMPFILE = nil;
-	return ret;
-    }
 }
 
 /**
@@ -136,24 +46,15 @@ global define boolean TESTSUITE_CLEAN () ``{
  * @param DEFAULT default read value
  * @return whatever the FUNCTION returns
  */
-global define any TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
+define any TEST (any FUNCTION, list INPUT, any DEFAULT) ``{
 
     y2debug ("FUNCTION=%1", FUNCTION);
 
-    string quotesign = substring (sformat ("%1", FUNCTION), 0, 1);
-    y2debug ("quotesign=%1", quotesign);
-
     TESTSUITE_INIT (INPUT, DEFAULT);
 
-    any real_ret = nil;
-    if (quotesign == "`")
-	real_ret = WFM::CallFunction (FUNCTION);
-    else
-	real_ret = eval (FUNCTION);
+    any real_ret = eval (FUNCTION);
 
     y2debug ("%1Return\t%2", dummy_log_string, real_ret);
-
-    TESTSUITE_CLEAN ();
 
     return real_ret;
 }
@@ -161,10 +62,10 @@ global define any TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
 /**
  * @param output whatever to be dumped into the log
  */
-global define void DUMP (any output) ``{
+define void DUMP (any output) ``{
     string out = sformat ("%1", output);
     list lines = splitstring (out, "\n");
-    maplist(string l, lines, ``{
+    maplist (`l, lines, ``{
 	return y2debug ("%1Dump\t%2", dummy_log_string, l);
     });
 }
@@ -172,21 +73,18 @@ global define void DUMP (any output) ``{
 /**
  * @param filename file to be dumped
  */
-global define void DUMPFILE (string filename) ``{
-    // initialize, in case this is the first call
-    TESTSUITE_TWO_SCRS ();
-    WFM::SCRSetDefault (TESTSUITE_SCR_LIVE);
+define void DUMPFILE (string filename) ``{
 
     string command = sformat("/bin/cat \"%1\" | sed \"s/^/%2File\t/\"",
 	    filename, dummy_log_string);
 
-    map res = SCR::Execute (.target.bash_output, command);
+    SCR::RegisterAgent (.target, "/usr/share/YaST2/scrconf/target.scr");
+    map res = (map) SCR::Execute (.target.bash_output, command);
+    SCR::UnregisterAllAgents ();
 
     string out = lookup (res, "stdout", " (nil)");
     list lines = splitstring (out, "\n");
-    maplist(string l, lines, ``{
-	return y2debug ("%1", l);
-    });
+    maplist (`l, lines, ``{ return y2debug ("%1", l); });
 }
 
 /* EOF */

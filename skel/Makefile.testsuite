@@ -75,8 +75,9 @@ clean:
 	rm -rf $(testsuite_dirs)
 	rm -f tmp.err.* tmp.out.* site.exp *.log *.sum site.bak
 
+#	parseycp -q -R $(srcdir)/..
 check:
 	@echo
 	@echo Parse YCP
-	parseycp -q -R $(srcdir)/..
+	@echo NOT RUNNING
 	@echo

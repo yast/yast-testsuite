@@ -1,202 +1,119 @@
-/**
- * File:	modules/Pkg.ycp
- * Package:	Testsuite
- * Summary:	Replacement for Pkg:: (yast2-core/wfm)
- * Authors:	Martin Vidner <mvidner@suse.cz>
- *
- * $Id$
- *
- * WARNING!
- * This is not what is usually called when you use Pkg::.
- *
- * Pkg is a namespace built into the WFMinterpreter. Normally you
- * don't import it. For testsuites, we need to fake the return values and
- * this is what this module is for.
- *
- * Usage:
- *  include "testsuite.ycp";
- *  import "Pkg";
- *  import "TestedModule";
- *  Pkg::FAKE (`IsProvided, true);
- *  TEST (``(TestedModule::Read ()), [], nil);
- *  Pkg::FAKE (`IsProvided, $[ "sendmail": false, "postfix": true]);
- *  TEST (``(TestedModule::Read ()), [], nil);
- *
- * TODO: if there is a need to fake another namespace,
- * factor out a Fake:: module
- */
-
 {
-
     module "Pkg";
+    
+    global define boolean 		ActivateSelections 	() { return true; }
+    global define boolean 		AnyToInstall 		() { return true; }
+    global define boolean 		ClearSaveState 		() { return true; }
+    global define boolean 		ClearSelection 		(string s) { return true; }
+    global define void 			CreateBackups 		(boolean b) { return; }
+    global define map<string,any>	DoProvide 		(list<string> l) { return nil; }
+    global define map<string,any>	DoRemove 		(list<string> l) { return nil; }
+    global define list<string>		FilterPackages		(boolean b, boolean c, boolean d, boolean e) { return nil; }
+    global define list<string>		GetAdditionalLocales	() { return nil; }
+    global define string		GetBackupPath 		() { return nil; }
+    global define string		GetLocale 		() { return nil; }
+    global define list<string>		GetPackages		(symbol s, boolean b) { return nil; }
+    global define list<string>		GetSelections		(symbol s, string t) { return nil; }
+    global define void			InstSysMode 		() { return; }
+    global define boolean 		IsAvailable		(string s) { return true; }
+    global define boolean 		IsManualSelection	() { return true; }
+    global define boolean 		IsProvided		(string s) { return true; }
+    global define boolean 		IsSelected		(string s) { return true; }
+    global define boolean 		PkgAnyToDelete		() { return true; }
+    global define list<any>		PkgCommit		(integer i) { return nil; }
+    global define boolean 		PkgDelete		(string s) { return true; }
+    global define string		PkgGroup		(string s) { return nil; }
+    global define boolean 		PkgInstall		(string s) { return true; }
+    global define list<string>		PkgMediaNames		() { return nil; }
+    global define list<list<integer> >	PkgMediaSizes		() { return nil; }
+    global define boolean 		PkgNeutral		(string s) { return true; }
+    global define integer		PkgSize			(string s) { return nil; }
+    global define boolean		PkgSolve		(boolean b) { return true; }
+    global define integer		PkgSolveErrors		() { return nil; }
+    global define boolean		PkgSrcInstall		(string s) { return true; }
+    global define string		PkgSummary		(string s) { return nil; }
+    global define string		PkgVersion		(string s) { return nil; }
+    global define boolean		PkgReset		() { return true; }
+    global define boolean 		RestoreState		(boolean b) { return true; }
+    global define boolean 		SaveState		() { return true; }
+    global define list<string>		SelectionContent	(string s, boolean b, string t) { return nil; }
+    global define map<string,any>	SelectionData		(string s) { return nil; }
+    global define void			SetAdditionalLocales	(list<string> l) { return; }
+    global define void			SetBackupPath		(string s) { return; }
+    global define void			SetLocale		(string s) { return; }
+    global define boolean 		SetSelection		(string s) { return true; }
+    global define boolean 		SourceCacheCopyTo	(string s) { return true; }
+    global define boolean 		SourceChangeUrl		(integer i, string s) { return true; }
+    global define integer		SourceCreate		(string s, string t) { return nil; }
+    global define boolean 		SourceDelete		(integer i) { return true; }
+    global define boolean 		SourceFinish		(integer i) { return true; }
+    global define boolean 		SourceFinishAll		() { return true; }
+    global define map<string, any>	SourceGeneralData	(integer i) { return nil; }
+    global define list<any>		SourceGetCurrent	(boolean b) { return nil; }
+    global define boolean 		SourceInstallOrder	(map<integer,integer> m) { return true; }
+    global define void			SourceLowerPriority	(integer i) { return; }
+    global define map<string,any>	SourceMediaData		(integer i) { return nil; }
+    global define map<string,string>	SourceProduct		(integer i) { return nil; }
+    global define map<string,any>	SourceProductData	(integer i) { return nil; }
+    global define string		SourceProvideDir	(integer i, integer j, string s) { return nil; }
+    global define string		SourceProvideFile	(integer i, integer j, string s) { return nil; }
+    global define boolean 		SourceRaisePriority	(integer i) { return true; }
+    global define boolean 		SourceSaveRanks		() { return true; }
+    global define boolean 		SourceSetEnabled	(integer i, boolean b) { return true; }
+    global define boolean 		SourceSetRamCache	(boolean b) { return true; }
+    global define list<integer>		SourceStartCache	(boolean b) { return nil; }
+    global define boolean 		SourceStartManager	(boolean b) { return true; }
+    global define void			TargetInitDU		(list<map<any,any> > l) { return; }
+    global define integer		TargetBlockSize		(string s) { return nil; }
+    global define integer		TargetCapacity		(string s) { return nil; }
+    global define boolean 		TargetFileHasOwner	(string s) { return true; }
+    global define boolean 		TargetFinish		() { return true; }
+    global define map<string,any>	TargetGetDU		() { return nil; }
+    global define boolean 		TargetInit		(string s, boolean b) { y2error ("It's alive"); return true; }
+    global define boolean 		TargetInstall		(string s) { return true; }
+    global define boolean 		TargetLogfile		(string s) { return true; }
+    global define list<any>		TargetProducts		() { return nil; }
+    global define boolean 		TargetRebuildDB		() { return true; }
+    global define boolean 		TargetRemove		(string s) { return nil; }
+    global define map<string,string> 	TargetUpdateInf		(string s) { return nil; }
+    global define integer		TargetUsed		(string s) { return nil; }
+    global define boolean 		YouAttachSource		() { return true; }
+    global define boolean 		YouDisconnect		() { return true; }
+    global define boolean 		YouFinish		() { return true; }
+    global define map<any,any>		YouFirstPatch		(boolean b) { return nil; }
+    global define string		YouGetCurrentPatch	(boolean b, boolean c) { return nil; }
+    global define string		YouGetDirectory		() { return nil; }
+    global define boolean		YouGetPackages		() { return true; }
+    global define string		YouGetPatches		(string s, boolean b, boolean c) { return nil; }
+    global define boolean		YouInstallCurrentPatch	() { return true; }
+    global define boolean 		YouInstallPatches	() { return true; }
+    global define map<any,any>		YouNextPatch		() { return nil; }
+    global define boolean 		YouRemovePackages	() { return true; }
+    global define void			YouSelectPatches	() { return; }
+    global define map<any, any>		YouStatus		() { return nil; }
+    global define list<integer>		PkgUpdateAll		(boolean b) { return nil; }
+    global define string		LastError		() { return nil; }
+    global define string		LastErrorId		() { return nil; }
+    global define string		LastErrorDetails	() { return nil; }
 
-    /**
-     * Holds the data to be faked.
-     * So far works only for functions with 0 to 1 parameters.
-     * Keys: symbols (function names)
-     * Values: map => return value is looked up according to the parameter
-     *         other => returned directly
-     *
-     * future special handling: ``(Literal ($[ ... ]))
-     */
-    map fake = $[];
-
-    /**
-     * Assign a fake entry.
-     * (Needed because the parser only allows Pkg::func(...).)
-     * @param name	function name
-     * @param value	a map or other value
-     * @see fake
-     */
-    global define void FAKE (symbol name, any value) ``{
-	fake[name] = value;
-    }
-
-    /**
-     * Generalized faker for one parameter functions
-     * @param verbose log using y2internal what we did?
-     * @param name	function name
-     * @param p1	its parameter
-     * @return		faked return value
-     */
-    define any FAKE_FUNCTION1 (boolean verbose, symbol name, any p1) ``{
-	// look up the faked function
-	any result = fake[name]:nil;
-	// if it's a map, look up the parameter
-	if (is (result, map))
-	{
-            map result_map = (map) result;
-
-            result = result_map[p1]:nil;
-	}
-
-	if (verbose)
-	{
-	    y2internal ("Pkg::%1 (%2): %3", name, p1, result);
-	}
-	return result;
-
-    }
-
-    /**
-     * Faked WFM::Pkg::IsAvailable
-     * @param p package
-     * @return availability
-     */
-    global define boolean IsAvailable (string p) ``{
-	return (boolean) FAKE_FUNCTION1 (true, `IsAvailable, p);
-    }
-
-    /**
-     * Faked WFM::Pkg::IsProvided
-     * @param p package
-     * @return availability
-     */
-    global define boolean IsProvided (string p) ``{
-	return (boolean) FAKE_FUNCTION1 (true, `IsProvided, p);
-    }
-
-    /**
-     * Faked WFM::Pkg::SourceProductData
-     * @param i whatever
-     * @return empty return value
-     */
-    global define map SourceProductData (integer i) ``{
-	return $[];
-    }
-
-    /**
-     * Faked WFM::Pkg::SourceStartCache
-     * (Used in PackageCallbacks constructor)
-     * @param b whatever
-     * @return empty return value
-     */
-    global define list SourceStartCache (boolean b) ``{
-	return [];
-    }
-
-    /**
-     * Faked WFM::Pkg::CallbackStartProvide
-     * (Used in PackageCallbacks constructor)
-     * @param s function name
-     */
-    global define void CallbackStartProvide (string s) ``{
-	return;
-    }
-
-    /**
-     * Faked WFM::Pkg::CallbackProgressProvide
-     * (Used in PackageCallbacks constructor)
-     * @param s function name
-     */
-    global define void CallbackProgressProvide (string s) ``{
-	return;
-    }
-
-    /**
-     * Faked WFM::Pkg::CallbackDoneProvide
-     * (Used in PackageCallbacks constructor)
-     * @param s function name
-     */
-    global define void CallbackDoneProvide (string s) ``{
-	return;
-    }
-
-    /**
-     * Faked WFM::Pkg::CallbackStartPackage
-     * (Used in PackageCallbacks constructor)
-     * @param s function name
-     */
-    global define void CallbackStartPackage (string s) ``{
-	return;
-    }
-
-    /**
-     * Faked WFM::Pkg::CallbackProgressPackage
-     * (Used in PackageCallbacks constructor)
-     * @param s function name
-     */
-    global define void CallbackProgressPackage (string s) ``{
-	return;
-    }
-
-    /**
-     * Faked WFM::Pkg::CallbackDonePackage
-     * (Used in PackageCallbacks constructor)
-     * @param s function name
-     */
-    global define void CallbackDonePackage (string s) ``{
-	return;
-    }
-
-    /**
-     * Faked WFM::Pkg::SourceGetCurrent
-     * (Used in PackageCallbacks constructor)
-     * @return empty return value
-     */
-    global define list SourceGetCurrent () ``{
-	return [];
-    }
-
-    /**
-     * Faked WFM::Pkg::CallbackSourceChange
-     * (Used in PackageCallbacks constructor)
-     * @param s whatever
-     */
-    global define void CallbackSourceChange (string s) ``{
-	return;
-    }
-
-    global define string GetLocale () ``{
-	return "en_US";
-    }
-
-    global define list TargetProducts() ``{
-	return [];
-    }
-
-    global define boolean TargetInit(string s, boolean b) ``{
-	return true;
-    }
-
+    // callback registration routines
+    global define void			CallbackMediaChange	(string s) { return nil; }
+    global define void			CallbackSourceChange	(string s) { return nil; }
+    global define void			CallbackStartProvide	(string s) { return nil; }
+    global define void			CallbackProgressProvide (string s) { return nil; }
+    global define void			CallbackDoneProvide	(string s) { return nil; }
+    global define void			CallbackStartPackage	(string s) { return nil; }
+    global define void			CallbackProgressPackage (string s) { return nil; }
+    global define void			CallbackDonePackage	(string s) { return nil; }
+    global define void			CallbackProgressRebuildDB (string s) { return nil; }
+    global define void			CallbackYouProgress 	(string s) { return nil; }
+    global define void			CallbackYouPatchProgress (string s) { return nil; }
+    global define void			CallbackYouExecuteYcpScript (string s) { return nil; }
+    global define void			CallbackYouScriptProgress (string s) { return nil; }
+    global define void			CallbackStartConvertDb	(string s) { return nil; }
+    global define void			CallbackProgressConvertDb (string s) { return nil; }
+    global define void			CallbackNotifyConvertDb	(string s) { return nil; }
+    global define void			CallbackStopConvertDb	(string s) { return nil; }
 }
+
+
