@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Dec  9 20:40:10 CET 2002 - msvec@suse.cz
+
+- added another Pkg:: function
+- fixed for new log component names
+- 2.7.4
+
+-------------------------------------------------------------------
 Thu Dec  5 13:28:16 CET 2002 - mvidner@suse.cz
 
 - Fixed a typo to make it really work.
