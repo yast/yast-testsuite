@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb  5 13:41:36 CET 2004 - msvec@suse.cz
+
+- possibility to limit testsuite output only to some files
+- 2.9.5
+
+-------------------------------------------------------------------
 Fri Jan 30 12:41:18 CET 2004 - msvec@suse.cz
 
 - log also the empty lines (and files) in DUMP and DUMPFILE
