@@ -1,0 +1,35 @@
+<html><head>
+<title>YaST2 modules testsuite -- Example session</title>
+</head><body bgcolor=#ffffff>
+<!-- Author: Michal Svec <msvec@suse.cz> -->
+<!-- $Id$ -->
+<a name="top"><p>
+<h1>YaST2 modules testsuite -- Example session</h1>
+<hr>
+
+<!-- Example test session -->
+<p><a name="main"><u><h2>Example test session</h2></u>
+
+This is how your testing session can look like.
+
+<h3>Example</h3>
+
+<pre>
+    bash$ cd .../yast/modules/y2c_blah/testsuite
+    bash$ vim Test1.ycp
+    bash$ make check
+    ...
+    # of unexpected failures        1
+    ...
+
+    bash$ cp tmp.out.Test1 tests/Test1.out
+    bash$ touch tests/Test1.err
+
+    bash$ make check
+    ...
+    # of expected passes            1
+    ...
+</pre>
+
+
+</body></html>

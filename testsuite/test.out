@@ -1,0 +1,12 @@
+Dir	.read: ["path"]
+Read	.read.path "read_result"
+Write	.write.path "write_arg" "write_result"
+Execute	.execute.path "execute_arg" "execute_result"
+Return	return_string
+Log	error_string
+Dump	731
+Dump	dump_string
+Dump	dump_string1
+Dump	dump_string2
+File	dump_file_string1
+File	dump_file_string2

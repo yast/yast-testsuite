@@ -1,0 +1,100 @@
+/**
+ * File:	testsuite.ycp
+ * Module:	Testsuite
+ * Summary:	Testsuite include
+ * Authors:	Michal Svec <msvec@suse.cz>
+ *
+ * $Id$
+ */
+
+{
+
+global define UI::GetDisplayInfo() ``{ return $[]; }
+global define UI::HasSpecialWidget(any x) ``{ return false; }
+global define ui_defines() ``{ };
+
+/**
+ */
+global define TESTSUITE_INIT(list INPUT, any DEFAULT) ``{
+
+    string read = sformat("%1",select(INPUT,0,$[]));
+    string write = sformat("%1",select(INPUT,1,$[]));
+    string exec = sformat("%1",select(INPUT,2,$[]));
+
+    string default = sformat("%1",DEFAULT);
+
+    y2debug("READ=%1",read);
+    y2debug("WRITE=%1",write);
+    y2debug("EXECUTE=%1",exec);
+    y2debug("DEFAULT=%1",DEFAULT);
+
+    list ret = [];
+    ret = add(ret,SCR::RegisterAgent(.target, "/usr/lib/YaST2/scrconf/target.scr"));
+
+    string tmpdir = SCR::Read(.target.tmpdir);
+    if(tmpdir==nil || tmpdir=="") tmpdir="/tmp";
+
+    string tmpfile = tmpdir + "_" + "dummy.scr";
+    y2debug("tmpfile=%1",tmpfile);
+
+    string scrfile = ".\n\n`ag_dummy(DataMap(\n  " + read;
+    scrfile = scrfile + ",\n" + write + ",\n" + exec;
+    scrfile = scrfile + ",\n" + default + "\n))\n";
+    y2debug("scrfile=%1",scrfile);
+
+    ret = add(ret,SCR::Write(.target.string,tmpfile,scrfile));
+    ret = add(ret,SCR::UnregisterAllAgents());
+    ret = add(ret,SCR::RegisterAgent(.,tmpfile));
+    y2debug("ret=%1", ret);
+
+    return ret;
+}
+
+/**
+ */
+global define TEST(term FUNCTION, list INPUT, any DEFAULT) ``{
+
+    y2debug("FUNCTION=%1", FUNCTION);
+
+    string quote = substring(sformat("%1", FUNCTION), 0, 1);
+    y2debug("quote=%1",quote);
+
+    TESTSUITE_INIT(INPUT, DEFAULT);
+
+    any real_ret = nil;
+    if(quote == "`")
+        real_ret = CallFunction(FUNCTION);
+    else
+        real_ret = eval(FUNCTION);
+
+    y2debug("rEaL_rEt=%1", real_ret);
+
+    SCR::UnregisterAllAgents();
+
+    return real_ret;
+}
+
+/**
+ */
+global define DUMP(any output) ``{
+    string out = sformat("%1",output);
+    list lines = splitstring(out, "\n");
+    maplist(`l, lines, ``(y2debug("aNY_OutPuT=%1",l)));
+}
+
+/**
+ */
+global define DUMPFILE(string filename) ``{
+    string command = "/bin/cat " + filename + " | sed \"s/^/fIlE_OutPuT=/\"";
+
+    SCR::RegisterAgent(.target, "/usr/lib/YaST2/scrconf/target.scr");
+    map res = SCR::Execute(.target.bash_output, command);
+    SCR::UnregisterAllAgents();
+
+    string out = lookup(res, "stdout","(nil)");
+    list lines = splitstring(out, "\n");
+    maplist(`l, lines, ``(y2debug("%1",l)));
+}
+
+/* EOF */
+}

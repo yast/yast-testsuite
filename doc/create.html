@@ -1,0 +1,114 @@
+<html><head>
+<title>YaST2 modules testsuite -- Creating tests</title>
+</head><body bgcolor=#ffffff>
+<!-- Author: Michal Svec <msvec@suse.cz> -->
+<!-- $Id$ -->
+<a name="top"><p>
+<h1>YaST2 modules testsuite -- Creating tests</h1>
+<hr>
+
+<!-- Creating tests -->
+<p><a name="main"><u><h2>Creating tests</h2></u>
+
+Creating tests is easy. You need to have your code ready
+(for example in some include file) and you need to know
+the input and output data.
+
+<h3>Testing a function</h3>
+
+Presume you have a function <tt>fun()</tt> in the include
+file <tt>routines.ycp</tt>. The function needs one argument
+-- <tt>string input</tt> and returns one argument --
+<tt>string output</tt>.
+
+<p>
+We create a test case:
+<pre>
+    {
+        include "testsuite.ycp";
+        include "your/routines.ycp";
+        TEST(``(fun("input1")),[],nil);
+        TEST(``(fun("input2")),[],nil);
+        TEST(``(fun(nil)),[],nil);
+    }
+</pre>
+
+In this test case, we are testing a function <tt>fun</tt> with
+"input1", "input2" and nil as input parameters.
+
+<h3>SCR calls</h3>
+
+In the next test case we test a module (write only client).
+This shows also another possibility of TEST function usage
+-- not function, but client call.
+
+<p>
+In this example it is also shown how the system access is simulated
+in the testsuite. You define values which are returned upon the SCR
+call instead of the real agent call. Testsuite uses a
+<a href="../../yast2-core-scr/ag_dummy/">dummy agent</a>
+for this simulation, so syntax is same.
+
+<pre>
+    {
+        include "testsuite.ycp";
+        include "your/routines.ycp";
+
+        map READ = $[
+            "x" : 1,
+            "y" : $[ "a" : 2, "b" : 3 ]
+        ];
+        map WRITE = $[];
+        map EXECUTE = $[
+            "target": $[ "mkdir": true ]
+        ];
+        any DEFAULT = false;
+
+        map DATA = $[ ... ];
+
+        TEST(`module_write(DATA),[READ,WRITE,EXECUTE],DEFAULT);
+    }
+</pre>
+
+The READ, WRITE, EXECUTE and DEFAULT values are used only if
+the tested function uses SCR calls.
+
+<p>
+For example, SCR(`Read(.x)) returns 1. Other examples:
+
+<ul>
+<li>SCR(`Read(.x)) -&gt; 1
+<li>SCR(`Read(.y.a)) -&gt; 2
+<li>SCR(`Read(.y.b)) -&gt; 3
+<li>SCR(`Read(.y.c)) -&gt; false
+<li>SCR(`Read(.z)) -&gt; false
+<li>SCR(`Execute(.target.mkdir,"/etc/gss.up")) -&gt; true
+<li>SCR(`Execute(.target.bash,"ls")) -&gt; 0
+<li>SCR(`Write(.x)) -&gt; true
+</ul>
+
+So, if your module reads string from the path .xhost.key, simply do:
+
+<pre>
+    map READ = $[ "xhost" : $[ "key" : "some string" ] ];
+    any DEFAULT = false;
+    TEST(`your_module(DATA),[READ],DEFAULT);
+</pre>
+
+<h3>Other examples</h3>
+
+That's basically all what you need for creating testsuite.
+Look to other chapters, how to process the testsuite and
+use it daily.
+
+<p>
+You may want to take a look to some other modules for examples.
+<br>For instance:
+
+<ul>
+<li>security module (y2c_sec) for client testing
+<li>lan module (y2c_lan) for routines testing
+<li>packages module (y2m_inst/ycp/packages) for multiple SCR calls
+</ul>
+
+</body></html>

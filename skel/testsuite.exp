@@ -1,0 +1,21 @@
+# YaST2: modules testsuite
+#
+# Description:
+#   Main file for all tests
+#
+# Author:
+#   Michal Svec <msvec@suse.cz>
+#
+# $Id$
+
+set filenames [glob $srcdir/tests/*.ycp]
+
+puts "\nChecking started\n"
+
+foreach file $filenames {
+  if {[testsuite-run $file] < 0} {
+    return
+  }
+}
+
+puts "\nChecking finished\n"

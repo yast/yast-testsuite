@@ -1,0 +1,79 @@
+<html><head>
+<title>YaST2 modules testsuite -- Autobuild testing</title>
+</head><body bgcolor=#ffffff>
+<!-- Author: Michal Svec <msvec@suse.cz> -->
+<!-- $Id$ -->
+<a name="top"><p>
+<h1>YaST2 modules testsuite -- Autobuild testing</h1>
+<hr>
+
+<!-- Autobuild testing -->
+<p><a name="main"><u><h2>Autobuild testing</h2></u>
+
+There are some changes you have to do in your spec file
+in order to test your module during the autobuild.
+
+<h3>Update neededforbuild</h3>
+
+Your <tt>neededforbuild</tt> should look like this.
+You probably don't need any other packages for the build.
+
+<pre>
+    # neededforbuild
+    autoconf automake ycpdoc
+    yast2-testsuite dejagnu expect tcl
+    yast2-base libycp liby2 libyui libscr
+    yast2-core-wfm yast2-core-scr yast2-agent-system
+</pre>
+
+<h3>Update %build and %install stages</h3>
+
+The %build and %install stages should also look like this.
+And again, you probably don't need to add anything.
+
+<pre>
+    %build
+    ./configure
+    make
+
+    %install
+    make install
+    make check
+    %{?suse_check}
+</pre>
+
+<h3>Building</h3>
+
+Create new spec file and package and use your usual way of
+building package.
+
+<pre>
+    bash$ make -f Makefile.cvs
+    bash$ make package
+    bash$ cd package
+    bash$ abuild...
+</pre>
+
+If everything succeed, check in the package.
+
+<h3>Hunting bugs</h3>
+
+Testsuite failed during auto build. What to do now?
+These steps should help you to hunt the bug:
+
+<ul>
+<li>Reproduce the bug with "<tt>build yourpackage</tt>"
+<li>Do "<tt>chroot /tmp/buildsystem.host.user</tt>", or "<tt>chroot /abuild/buildsystem.host.user</tt>"
+<li>CD to /usr/src/packages/BUILD/yourpackage/testsuite/tests/
+<li>Do "<tt>mount /proc</tt>"
+<li>Run "<tt>/usr/lib/YaST2/bin/y2base failedtest.ycp scr</tt>"
+<li>Take a look at "<tt>/var/log/y2log</tt>"
+</ul>
+
+Now you have the same situation as usual. You have failing script,
+possibility of testing and the y2log output.
+
+<p>
+Good luck!
+
+</body></html>

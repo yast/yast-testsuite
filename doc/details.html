@@ -1,0 +1,117 @@
+<html><head>
+<title>YaST2 modules testsuite -- Testsuite details</title>
+</head><body bgcolor=#ffffff>
+<!-- Author: Michal Svec <msvec@suse.cz> -->
+<!-- $Id$ -->
+<a name="top"><p>
+<h1>YaST2 modules testsuite -- Testsuite details</h1>
+<hr>
+
+<!-- Testsuite details -->
+<p><a name="main"><u><h2>Testsuite details</h2></u>
+
+Some details about the testsuite possibilities and detailed functions
+descriptions.
+
+<h3>TEST function details</h3>
+This is a TEST function prototype.
+<pre>
+    TEST(term FUNCTION, list INPUT, any DEFAULT);
+</pre>
+
+<ul>
+<li>FUNCTION is the tested function or client
+<li>INPUT is a list of maps for simulated SCR calls.
+<li>DEFAULT is default value for Read calls
+</ul>
+
+The FUNCTION can be either term (a function call) or a client call.
+
+<pre>
+    TEST(``(fun(DATA)), [], nil);
+    TEST(`(module_write(DATA)), [], nil);
+</pre>
+
+<ul>
+<li>DATA is the input data
+</ul>
+
+The INPUT can be anything between empty list [] and the full 
+list of [READ, WRITE, EXEC]. For details about INPUT maps format
+see the dummy agent documentation.
+
+<ul>
+<li>READ is the SCR Read map
+<li>WRITE is the SCR Write map
+<li>EXEC is the SCR Execute map
+</ul>
+
+The READ, WRITE, EXECUTE  and DEFAULT values are used only, if the module
+uses SCR(`(Read|Write|Execute)(...)). Than values from READ, WRITE, EXECUTE
+maps are returned for corresponding calls. The DEFAULT is returned
+by SCR(`Read(...)) if the path is not found in the INPUT. SCR(`Write(...))
+returns true and SCR(`Execute(...)) returns 0 if path is not found.
+
+<p>
+The maps can also be a list of maps, which means that particular map
+would be used on the n-th agent call. Again, see the dummy agent
+documentation regarding this feature.
+
+<p>
+Testsuite uses a
+<a href="../../yast2-core-scr/ag_dummy/">dummy agent</a>
+for this simulation, so for details on SCR simulation
+take a look at the dummy agent documentation.
+
+<h3>DUMPFILE function</h3>
+Dump the given file to the log.
+<br>The prefix is "File".
+<pre>
+    DUMPFILE(string filename);
+</pre>
+
+<h3>DUMP function</h3>
+Dump the variable contents (any data) to the log.
+<br>The prefix is "Dump".
+<pre>
+    DUMP(any output);
+</pre>
+
+<h3>Possible log outputs</h3>
+<table><tr><td>
+<ul>
+<li>Dir
+<li>Read
+<li>Write
+<li>Execute
+<li>Return
+<li>Dump
+<li>File
+<li>Log
+</ul>
+</td><td>
+SCR(Dir()) call<br>
+SCR(Read()) call<br>
+SCR(Write()) call<br>
+SCR(Execute()) call<br>
+Function return value<br>
+Variable contents<br>
+File contents<br>
+Log output<br>
+</td></tr></table>
+
+<h3>Environment control</h3>
+
+If anything fails, you can set an environment variable
+<tt>Y2TESTSUITE</tt> to 1 and see the whole y2log output
+in the testsuite output.
+
+<p>
+Example:
+
+<pre>
+    bash$ Y2TESTSUITE=1 make check
+    ...
+</pre>
+
+</body></html>

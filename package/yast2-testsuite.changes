@@ -1,0 +1,161 @@
+-------------------------------------------------------------------
+Fri May 31 14:37:38 CEST 2002 - msvec@suse.cz
+
+- possibility to test constructors
+- 2.6.2
+
+-------------------------------------------------------------------
+Fri May 10 17:45:56 CEST 2002 - msvec@suse.cz
+
+- accept the new broken Wizard constructor
+- 2.6.1
+
+-------------------------------------------------------------------
+Wed Apr  3 14:51:52 CEST 2002 - msvec@suse.cz
+
+- use devtools create-spec and y2autoconf
+- updated for the new system agent
+- 2.6.0
+
+-------------------------------------------------------------------
+Thu Dec 13 12:59:19 CET 2001 - arvin@suse.de
+
+- adapted to renaming of y2bignfat to y2base
+- 2.5.3
+
+-------------------------------------------------------------------
+Fri Nov 30 16:07:05 CET 2001 - msvec@suse.cz
+
+- make all ycp symbols global for testing local functions
+- removed some duplicated code
+- 2.5.2
+
+-------------------------------------------------------------------
+Thu Nov 29 08:50:42 CET 2001 - pblahos@suse.cz
+
+- Added 3rd parameter to select to satisfy new libycp.
+- 2.5.1
+
+-------------------------------------------------------------------
+Mon Nov 12 18:07:01 CET 2001 - msvec@suse.cz
+
+- use yast2-devtools
+- fixed lookup default parameter
+- 2.5.0
+
+-------------------------------------------------------------------
+Wed Sep 26 16:12:44 CEST 2001 - msvec@suse.cz
+
+- fixed DUMP for non-string variables
+- updated testsuite
+- 2.4.6
+
+-------------------------------------------------------------------
+Wed Sep 26 09:11:23 CEST 2001 - msvec@suse.cz
+
+- minor makefiles fixes
+- added some missing files
+- fixed DUMPFILE (new system agent)
+- fixed DUMP (multiple lines)
+- testsuite update
+- 2.4.5
+
+-------------------------------------------------------------------
+Tue Aug 28 17:44:35 CEST 2001 - msvec@suse.cz
+
+- parseycp during check
+- return the retcode
+- 2.4.4
+
+-------------------------------------------------------------------
+Tue Aug 21 16:18:25 CEST 2001 - msvec@suse.cz
+
+- unset all locale variables before testing
+- use faster SCR::
+- 2.4.3
+
+-------------------------------------------------------------------
+Thu Aug  9 11:18:48 CEST 2001 - msvec@suse.cz
+
+- report signal number if yast2 exit with failure
+- accept new Dir behavior
+- 2.4.2
+
+-------------------------------------------------------------------
+Tue Jul 17 15:27:11 CEST 2001 - msvec@suse.cz
+
+- don't ignore white-space in diffs
+- changes due to again renamed target.scr
+- don't accept declarations with '|'
+- exchange err and out outputs
+- minor fix of filtering
+- 2.4.1
+
+-------------------------------------------------------------------
+Tue Jul 10 12:23:07 CEST 2001 - ro@suse.de
+
+- removed yast2-core-translator from neededforbuild
+
+-------------------------------------------------------------------
+Tue Jul  3 12:45:00 CEST 2001 - msvec@suse.cz
+
+- adapted to new system agent split of y2scr
+- 2.4.0
+
+-------------------------------------------------------------------
+Tue Apr 17 17:21:54 CEST 2001 - msvec@suse.cz
+
+- major documentation rewrite
+- removed isnils
+- 2.3.7
+
+-------------------------------------------------------------------
+Fri Apr 13 09:57:45 CEST 2001 - msvec@suse.cz
+
+- run diff on the last failed test
+- enabled abuild checking
+- 2.3.6
+
+-------------------------------------------------------------------
+Tue Apr 10 15:27:09 CEST 2001 - msvec@suse.cz
+
+- enabled maps as arguments for TEST
+- stop after the first failed test
+- 2.3.5
+
+-------------------------------------------------------------------
+Wed Apr  4 11:11:31 CEST 2001 - msvec@suse.cz
+
+- minor documentation update
+- documentation moved to $RPMNAME
+- fixed new target agent output
+- fixed logconf.ycp handling
+- 2.3.4
+
+-------------------------------------------------------------------
+Tue Mar 27 16:13:18 CEST 2001 - msvec@suse.cz
+
+- new libycp adoptation
+- output beautification (final)
+- testsuite
+- 2.3.3
+
+-------------------------------------------------------------------
+Mon Mar 19 13:35:09 CET 2001 - arvin@suse.de
+
+- don't check for gperf in configure
+- 2.3.2
+
+-------------------------------------------------------------------
+Fri Mar 16 14:16:44 CET 2001 - msvec@suse.cz
+
+- autobuild checking changes
+- 2.3.1
+
+-------------------------------------------------------------------
+Wed Mar  7 15:42:14 CET 2001 - msvec@suse.cz
+
+- Initial version
+- Incorporates y2scr/ag_target change: .target.tmpdir is now
+  deleted when target agent is unmounetd. <pblahos>
+- DUMP function <gs>

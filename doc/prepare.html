@@ -1,0 +1,58 @@
+<html><head>
+<title>YaST2 modules testsuite -- Preparation</title>
+</head><body bgcolor=#ffffff>
+<!-- Author: Michal Svec <msvec@suse.cz> -->
+<!-- $Id$ -->
+<a name="top"><p>
+<h1>YaST2 modules testsuite -- Preparation</h1>
+<hr>
+
+<!-- Preparation -->
+<p><a name="main"><u><h2>Preparation</h2></u>
+
+There is not much needed in order to prepare the system
+on testing yast2 modules.
+
+<p>
+<h3>Install packages</h3>
+<ul>
+<li>expect.rpm
+<li>dejagnu.rpm
+<li>yast2-testsuite.rpm
+</ul>
+
+<p>
+<h3>Prepare your module</h3>
+
+<pre>
+    bash$ cd ".../modules/y2c_blah"
+    bash$ make -f /usr/lib/YaST2/testsuite/Makefile.testsuite prepare
+
+    This creates the testsuite directory.<br>
+    Now, add a file <tt>testsuite/Makefile</tt> to the AC_OUTPUT() macro
+    in your <tt>configure.in</tt> and create a Makefile.
+
+    Also, don't forget to add "testsuite" to SUBDIRS in Makefile.am.
+
+<pre>
+    bash$ vim configure.in
+    bash$ vim Makefile.am
+    bash$ make -f Makefile.cvs
+
+<pre>
+Now, the testsuite should be ready for creation of tests and testing.
+
+<p>
+<h3>Preparation example</h3>
+
+Just to sum things up, this is an example of how your preparation
+session can look like.
+
+<pre>
+    bash$ sudo rpm -i yast2-testsuite.rpm
+    bash$ cd .../yast/modules/y2c_sec/
+    bash$ make -f /usr/lib/YaST2/testsuite/Makefile.testsuite prepare
+    bash$ vim configure.in
+    bash$ make -f Makefile.cvs
+
+</body></html>

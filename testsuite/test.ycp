@@ -1,0 +1,44 @@
+/**
+ * File:
+ *   check.ycp
+ *
+ * Module:
+ *   Testsuite
+ *
+ * Summary:
+ *   Testsuite check script.
+ *
+ * Authors:
+ *   Michal Svec <msvec@suse.cz>
+ *
+ * $Id$
+ */
+
+{
+
+include "./../src/testsuite.ycp";
+
+map READ = $[ "read" : $[ "path" : "read_result" ] ];
+map WRITE = $[ "write" : $[ "path" : "write_result" ] ];
+map EXEC = $[ "execute" : $[ "path" : "execute_result" ] ];
+
+//string DEFAULT = "default_string";
+
+global define testfunc() ``{
+    SCR::Dir(.read);
+    SCR::Read(.read.path);
+    SCR::Write(.write.path, "write_arg");
+    SCR::Execute(.execute.path, "execute_arg");
+    return "return_string";
+}
+
+TEST(``(testfunc()), [ READ, WRITE, EXEC ], nil); //DEFAULT);
+
+y2error("error_string");
+
+DUMP(731);
+DUMP("dump_string");
+DUMP("dump_string1\ndump_string2");
+DUMPFILE("dump_file");
+
+}
