@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 29 10:59:12 CEST 2002 - msvec@suse.cz
+
+- provide Pkg::SourceProductData for modules using Installation.ycp
+- 2.6.9
+
+-------------------------------------------------------------------
 Fri Aug 23 12:07:13 CEST 2002 - mvidner@suse.cz
 
 - Added a dummy Pkg module for faking Pkg::Is{Provided,Available}

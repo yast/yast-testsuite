@@ -88,4 +88,12 @@
     global define boolean IsProvided (string p) ``{
 	return FAKE_FUNCTION1 (true, `IsProvided, p);
     }
+
+    /**
+     * Faked WFM::Pkg::SourceProductData
+     */
+    global define map SourceProductData (integer i) ``{
+	return $[];
+    }
+
 }
