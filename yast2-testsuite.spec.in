@@ -20,7 +20,10 @@ BuildArchitectures: noarch
 
 %files
 %defattr(-,root,root)
+%dir @moduledir@
+@moduledir@/Pkg.ycp
 %dir @ydatadir@/testsuite
 @ydatadir@/testsuite/*
+%dir @yncludedir@
 @yncludedir@/testsuite.ycp
 %doc @docdir@

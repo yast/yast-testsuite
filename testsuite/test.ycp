@@ -41,4 +41,31 @@ DUMP("dump_string");
 DUMP("dump_string1\ndump_string2");
 DUMPFILE("dump_file");
 
+DUMP("Pkg:: testing");
+global define string pkg_testfunc () ``{
+    if (Pkg::IsProvided ("sendmail"))
+    {
+	return "sendmail";
+    }
+    else if (Pkg::IsProvided ("postfix"))
+    {
+	return "postfix";
+    }
+    else
+    {
+	return "none";
+    }
+}
+
+import "Pkg";
+
+Pkg::FAKE (`IsProvided, true);
+TEST(``(pkg_testfunc ()), [], nil);
+
+Pkg::FAKE (`IsProvided, false);
+TEST(``(pkg_testfunc ()), [], nil);
+
+Pkg::FAKE (`IsProvided, $["sendmail": false, "postfix": true]);
+TEST(``(pkg_testfunc ()), [], nil);
+
 }
