@@ -8,7 +8,7 @@
 #
 # $Id$
 
-set filenames [glob $srcdir/tests/*.ycp]
+set filenames [lsort [glob $srcdir/tests/*.ycp]]
 
 puts "\nChecking started\n"
 
