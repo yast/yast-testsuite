@@ -19,12 +19,11 @@ string dummy_log_string = "LOGTHIS_SECRET_314 ";
  * @param DEFAULT default read value
  * @return list of various SCR return values
  */
-define list TESTSUITE_INIT (list INPUT, any DEFAULT) ``{
+define list TESTSUITE_INIT (list<map> INPUT, any DEFAULT) ``{
 
     map read = INPUT[0]: $[];
     map write = INPUT[1]: $[];
     map exec = INPUT[2]: $[];
-
 
     y2debug ("READ=%1", read);
     y2debug ("WRITE=%1", write);
@@ -46,7 +45,7 @@ define list TESTSUITE_INIT (list INPUT, any DEFAULT) ``{
  * @param DEFAULT default read value
  * @return whatever the FUNCTION returns
  */
-define any TEST (any FUNCTION, list INPUT, any DEFAULT) ``{
+define any TEST (any FUNCTION, list<map> INPUT, any DEFAULT) ``{
 
     y2debug ("FUNCTION=%1", FUNCTION);
 
