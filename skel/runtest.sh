@@ -55,7 +55,7 @@ parse() {
     ycp="\[YCP\].*$DUMMY_LOG_STRING"
     components="(agent-dummy|YCP)"
     cat "$file" | sed "$sed1" | grep -E "<[012]>[^]]*$components.*$regex.*$DUMMY_LOG_STRING" | sed "$sed2" # | cut -d" " -f7-
-    cat "$file" | grep "<[345]>" | grep -v "\[YCP\]" >&2
+    cat "$file" | grep "<[345]>" | grep -v "\[YCP\]" | grep -v "\[Y2PMrc\]" >&2
   else
     echo "Y2TESTSUITE set to \"$Y2TESTSUITE\""
     echo
