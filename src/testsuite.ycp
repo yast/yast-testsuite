@@ -22,7 +22,7 @@ string dummy_log_string = "LOGTHIS_SECRET_314 ";
 define list TESTSUITE_INIT (list<any> INPUT, any DEFAULT) ``{
 
     any default = $[];
-    
+
     any read = INPUT[0]: default;
     any write = INPUT[1]: default;
     any exec = INPUT[2]: default;
@@ -65,8 +65,8 @@ define any TEST (any FUNCTION, list<any> INPUT, any DEFAULT) ``{
  */
 define void DUMP (any output) ``{
     string out = sformat ("%1", output);
-    list lines = splitstring (out, "\n");
-    maplist (`l, lines, ``{
+    list<string> lines = splitstring (out, "\n");
+    maplist (string l, lines, ``{
 	return y2debug ("%1Dump\t%2", dummy_log_string, l);
     });
 }
@@ -84,8 +84,8 @@ define void DUMPFILE (string filename) ``{
     SCR::UnregisterAllAgents ();
 
     string out = lookup (res, "stdout", " (nil)");
-    list lines = splitstring (out, "\n");
-    maplist (`l, lines, ``{ return y2debug ("%1", l); });
+    list<string> lines = splitstring (out, "\n");
+    maplist (string l, lines, ``{ return y2debug ("%1", l); });
 }
 
 /* EOF */
