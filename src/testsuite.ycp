@@ -29,7 +29,7 @@ global define TESTSUITE_INIT(list INPUT, any DEFAULT) ``{
     y2debug("DEFAULT=%1",DEFAULT);
 
     list ret = [];
-    ret = add(ret,SCR::RegisterAgent(.target, "/usr/lib/YaST2/scrconf/target.scr"));
+    ret = add(ret,SCR::RegisterAgent(.target, "/usr/share/YaST2/scrconf/target.scr"));
 
     string tmpdir = SCR::Read(.target.tmpdir);
     if(tmpdir==nil || tmpdir=="") tmpdir="/tmp";
@@ -87,7 +87,7 @@ global define DUMP(any output) ``{
 global define DUMPFILE(string filename) ``{
     string command = "/bin/cat " + filename + " | sed \"s/^/fIlE_OutPuT=/\"";
 
-    SCR::RegisterAgent(.target, "/usr/lib/YaST2/scrconf/target.scr");
+    SCR::RegisterAgent(.target, "/usr/share/YaST2/scrconf/target.scr");
     map res = SCR::Execute(.target.bash_output, command);
     SCR::UnregisterAllAgents();
 
