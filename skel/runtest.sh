@@ -7,7 +7,20 @@
 # $2 = stdout
 # $3 = stderr
 #
+# These arguments may be preceded by options that will be passed to y2base
+#
 # $Id$
+
+while [ $# -gt 3 ]; do
+    OPTIONS="$OPTIONS $1"
+    shift
+done
+
+# but now y2base does not support them :-(
+if [ "$OPTIONS" ]; then
+    echo "Options not supported yet, discarding '$OPTIONS'" >&2
+    OPTIONS=""
+fi
 
 unset LANG
 unset LC_CTYPE
@@ -30,8 +43,10 @@ unset Y2DEBUGALL
 # export Y2DEBUGALL=1
 export Y2ALLGLOBAL=1
 
-export PATH="$PATH:/usr/lib/YaST2/bin"
-logconf="/usr/share/YaST2/data/testsuite/log.conf"
+ybindir=`pkg-config  --variable=ybindir  yast2-core`
+yast2dir=`pkg-config --variable=yast2dir yast2-core`
+Y2BASE=$ybindir/y2base
+logconf="$yast2dir/data/testsuite/log.conf"
 
 if [ ! -f "$logconf" ]; then
   logconf="../skel/log.conf"
@@ -39,7 +54,7 @@ fi
 
 DUMMY_LOG_STRING="LOGTHIS_SECRET_314 "
 
-files="$(grep '^[/* 	]*testedfiles:' "$1"|sed "s/.*testedfiles:[ 	]*//g")"
+files="$(grep '^[/*[:space:]]*testedfiles:' "$1"|sed 's/.*testedfiles:[[:space:]]*//g')"
 if [ "$files" ]; then
   echo "$files" >> testsuite.log
   regex="[ /](testsuite\.ycp|Testsuite\.ycp|$(echo "$files"|sed 's|\.|\\.|g'|sed 's| |\||g')):"
@@ -64,8 +79,7 @@ parse() {
   rm -f "$file"
 }
 
-#( y2base -l /dev/fd/1 "$1" scr 2>&1 ) | parse >"$2" 2>"$3"
-( y2base -l - -c "$logconf" "$1" testsuite 2>&1 ) | parse >"$2" 2>"$3"
+( $Y2BASE -l - -c "$logconf" $OPTIONS "$1" testsuite 2>&1 ) | parse >"$2" 2>"$3"
 
 retcode="$PIPESTATUS"
 if [ "$retcode" -gt 0 ]; then
