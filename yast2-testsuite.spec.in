@@ -1,5 +1,6 @@
 @HEADER-COMMENT@
-# neededforbuild yast2-core yast2-core-devel yast2-devtools liby2util yast2-packagemanager
+
+# neededforbuild  curl liby2util openssl perl-XML-Writer yast2-core yast2-core-devel yast2-devtools yast2-packagemanager
 
 @HEADER@
 Requires:	expect dejagnu yast2-core-devel
