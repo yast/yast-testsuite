@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun 12 11:46:43 CEST 2003 - arvin@suse.de
+
+- fixed file list
+
+-------------------------------------------------------------------
 Wed Feb  5 11:06:08 CET 2003 - lslezak@suse.cz
 
 - added TargetInit and TargetProducts into Pkg.ycp
