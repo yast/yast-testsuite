@@ -31,17 +31,24 @@ global define void ui_defines () ``{ };
  * The normal live scr.
  */
 global integer TESTSUITE_SCR_LIVE = nil;
+
 /**
  * A scr where the dummy agent is mounted.
  * Activated by TESTSUITE_INIT, deactivated by TESTSUITE_CLEAN.
  * Both are done in TEST.
  */
 global integer TESTSUITE_SCR_DUMMY = nil;
+
 /**
  * If non-nil, it holds the name of a temporary .scr file that will be
  * deleted by @ref TESTSUITE_CLEAN .
  */
 global string TESTSUITE_TMPFILE = nil;
+
+/**
+ * Secret string :-)
+ */
+global string dummy_log_string = "LOGTHIS_SECRET_314 ";
 
 /**
  * Ensure that we have both scrs
@@ -144,7 +151,7 @@ global define any TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
     else
 	real_ret = eval (FUNCTION);
 
-    y2debug ("rEaL_rEt=%1", real_ret);
+    y2debug ("%1Return\t%2", dummy_log_string, real_ret);
 
     TESTSUITE_CLEAN ();
 
@@ -157,7 +164,9 @@ global define any TEST (term FUNCTION, list INPUT, any DEFAULT) ``{
 global define void DUMP (any output) ``{
     string out = sformat ("%1", output);
     list lines = splitstring (out, "\n");
-    maplist (`l, lines, ``{ return y2debug ("aNY_OutPuT=%1", l); });
+    maplist(string l, lines, ``{
+	return y2debug ("%1Dump\t%2", dummy_log_string, l);
+    });
 }
 
 /**
@@ -168,13 +177,16 @@ global define void DUMPFILE (string filename) ``{
     TESTSUITE_TWO_SCRS ();
     WFM::SCRSetDefault (TESTSUITE_SCR_LIVE);
 
-    string command = "/bin/cat " + filename + " | sed \"s/^/fIlE_OutPuT=/\"";
+    string command = sformat("/bin/cat \"%1\" | sed \"s/^/%2File\t/\"",
+	    filename, dummy_log_string);
 
     map res = SCR::Execute (.target.bash_output, command);
 
     string out = lookup (res, "stdout", " (nil)");
     list lines = splitstring (out, "\n");
-    maplist (`l, lines, ``{ return y2debug ("%1", l); });
+    maplist(string l, lines, ``{
+	return y2debug ("%1", l);
+    });
 }
 
 /* EOF */
