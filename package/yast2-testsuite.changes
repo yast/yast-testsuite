@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 15 09:22:09 CEST 2002 - mvidner@suse.cz
+
+- yast2 not needed for build nor at runtime.
+- 2.6.7
+
+-------------------------------------------------------------------
 Fri Jul 12 12:59:07 CEST 2002 - kkaempf@suse.de
 
 - use "testsuite" server instead of "scr" server in order
