@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Dec  5 13:28:16 CET 2002 - mvidner@suse.cz
+
+- Fixed a typo to make it really work.
+- 2.7.3
+
+-------------------------------------------------------------------
 Thu Dec  5 12:31:29 CET 2002 - mvidner@suse.cz
 
 - Faked a bunch of Pkg:: functions that are used in the PackageCallbacks
