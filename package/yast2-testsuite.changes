@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jan 20 19:46:30 CET 2003 - msvec@suse.de
+
+- better (non-conflicting) local name variable
+- 2.7.5
+
+-------------------------------------------------------------------
 Mon Dec  9 20:40:10 CET 2002 - msvec@suse.cz
 
 - added another Pkg:: function
