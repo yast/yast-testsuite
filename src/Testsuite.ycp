@@ -23,11 +23,11 @@ string dummy_log_string = "LOGTHIS_SECRET_314 ";
  */
 global list Init (list<any> INPUT, any DEFAULT) {
 
-    any default = $[];
+    any defaultv = $[];
 
-    any read = INPUT[0]: default;
-    any write = INPUT[1]: default;
-    any exec = INPUT[2]: default;
+    any read = INPUT[0]: defaultv;
+    any write = INPUT[1]: defaultv;
+    any exec = INPUT[2]: defaultv;
 
     y2debug ("READ=%1", read);
     y2debug ("WRITE=%1", write);

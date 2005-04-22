@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Apr 22 13:35:18 CEST 2005 - mvidner@suse.cz
+
+- Do not use "default" as an identifier.
+
+-------------------------------------------------------------------
 Tue Dec 14 13:55:42 CET 2004 - mvidner@suse.cz
 
 - Log y2errors from Perl the same way as from YCP (#41448).
