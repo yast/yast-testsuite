@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
-Fri Apr 22 13:35:18 CEST 2005 - mvidner@suse.cz
+Tue May  3 17:54:02 CEST 2005 - mvidner@suse.cz
 
 - Do not use "default" as an identifier.
+- 2.11.3
 
 -------------------------------------------------------------------
 Tue Dec 14 13:55:42 CET 2004 - mvidner@suse.cz
