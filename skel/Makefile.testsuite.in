@@ -17,11 +17,11 @@ files_test=$(srcdir)/$(RPMNAME).test/testsuite.exp
 files_tmpl=$(srcdir)/Makefile.am $(srcdir)/.cvsignore
 files_all=$(files_config) $(files_test) $(files_tmpl) $(files_run)
 
-all: $(files_all) $(testsuite_dirs)
+all: dirs files
 
-$(files_all): $(testsuite_dirs)
+files: $(files_all)
 
-$(testsuite_dirs):
+dirs:
 	mkdir -p $(testsuite_dirs) $(srcdir)/tests
 
 # Overwrite the tested package's testsuite/Makefile.am only
@@ -33,14 +33,14 @@ $(srcdir)/Makefile.am: $(skeldir)/Makefile_am
 $(srcdir)/.cvsignore: $(skeldir)/_cvsignore
 	cp -f $< $@
 
-$(srcdir)/run/runtest.sh: $(skeldir)/runtest.sh run
+$(srcdir)/run/runtest.sh: $(skeldir)/runtest.sh
 	cp -f $< $@
 	chmod +x $@
 
-$(srcdir)/config/%: $(skeldir)/% config 
+$(srcdir)/config/%: $(skeldir)/%
 	cp -f $< $@
 
-$(srcdir)/$(RPMNAME).test/%: $(skeldir)/% $(RPMNAME).test 
+$(srcdir)/$(RPMNAME).test/%: $(skeldir)/%
 	cp -f $< $@
 
 prepare:
