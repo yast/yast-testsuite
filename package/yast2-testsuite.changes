@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul  8 15:53:35 CEST 2005 - visnov@suse.cz
+
+- Adapt build requirements for blocxx
+- 2.12.2 
+
+-------------------------------------------------------------------
 Tue May  3 17:54:02 CEST 2005 - mvidner@suse.cz
 
 - Do not use "default" as an identifier.
