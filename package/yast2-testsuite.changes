@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jan 10 13:51:32 CET 2006 - mvidner@suse.cz
+
+- Just bumped to 2.13
+- 2.13.0
+
+-------------------------------------------------------------------
 Wed Jul 20 10:41:00 CEST 2005 - mvidner@suse.cz
 
 - Added libxml2[-devel] to NFB because of yast2-packagemanager.
