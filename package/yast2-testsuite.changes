@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar 21 14:10:34 CET 2006 - mvidner@suse.cz
+
+- converted neededforbuild to BuildRequires,
+  removed yast2-packagemanager
+- 2.13.1
+
+-------------------------------------------------------------------
 Tue Jan 10 13:51:32 CET 2006 - mvidner@suse.cz
 
 - Just bumped to 2.13
