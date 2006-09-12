@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 12 14:41:55 CEST 2006 - mvidner@suse.cz
+
+- Require only yast2-core, not yast2-core-devel.
+- 2.13.2
+
+-------------------------------------------------------------------
 Tue Mar 21 14:10:34 CET 2006 - mvidner@suse.cz
 
 - converted neededforbuild to BuildRequires,
