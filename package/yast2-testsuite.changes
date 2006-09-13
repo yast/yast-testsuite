@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Sep 13 01:52:48 CEST 2006 - ro@suse.de
+
+- temporary fix to run testsuite without yast2-core-devel
+
+-------------------------------------------------------------------
 Tue Sep 12 14:41:55 CEST 2006 - mvidner@suse.cz
 
 - Require only yast2-core, not yast2-core-devel.
