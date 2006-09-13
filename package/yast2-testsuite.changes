@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep 13 10:32:44 CEST 2006 - mvidner@suse.cz
+
+- Using yast2-devtools.pc instead of yast2-core.pc is fine.
+  Now using --print-errors too.
+- 2.13.3
+
+-------------------------------------------------------------------
 Wed Sep 13 01:52:48 CEST 2006 - ro@suse.de
 
 - temporary fix to run testsuite without yast2-core-devel
