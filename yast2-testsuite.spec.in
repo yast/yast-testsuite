@@ -2,7 +2,8 @@
 
 @HEADER@
 BuildRequires:	openslp-devel perl-XML-Writer popt-devel yast2-core-devel yast2-devtools
-Requires:	expect dejagnu yast2-core-devel
+Requires:	expect dejagnu
+Requires:	yast2-core
 Summary:	YaST2 testsuite
 
 BuildArchitectures: noarch

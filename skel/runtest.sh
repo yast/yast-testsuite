@@ -43,8 +43,8 @@ unset Y2DEBUGALL
 # export Y2DEBUGALL=1
 export Y2ALLGLOBAL=1
 
-ybindir=`pkg-config  --variable=ybindir  yast2-core`
-yast2dir=`pkg-config --variable=yast2dir yast2-core`
+ybindir=`pkg-config  --print-errors --variable=ybindir  yast2-devtools`
+yast2dir=`pkg-config --print-errors --variable=yast2dir yast2-devtools`
 Y2BASE=$ybindir/y2base
 logconf="$yast2dir/data/testsuite/log.conf"
 
