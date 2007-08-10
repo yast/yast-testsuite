@@ -83,7 +83,7 @@ parse() {
   rm -f "$file"
 }
 
-( $Y2BASE -l - -c "$logconf" $OPTIONS "$1" testsuite 2>&1 ) | parse >"$2" 2>"$3"
+( $Y2BASE -l - -c "$logconf" $OPTIONS "$1" UI 2>&1 ) | parse >"$2" 2>"$3"
 
 retcode="$PIPESTATUS"
 if [ "$retcode" -gt 0 ]; then
