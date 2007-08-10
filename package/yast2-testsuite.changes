@@ -1,4 +1,20 @@
 -------------------------------------------------------------------
+Fri Aug 10 18:07:07 CEST 2007 - mvidner@suse.cz
+
+- Finished integrating Feature #120292, UI as a namespace callable
+  from yast2-*-bindings.
+- 2.15.1
+
+-------------------------------------------------------------------
+Wed Aug  8 17:04:55 CEST 2007 - mvidner@suse.cz
+
+- Adapted to changes in yast2-core needed for making UI callable from
+  yast2-*-bindings.
+  (The testsuite component is no longer usable because it does not
+  provide the UI namespace)
+- 2.15.0.1
+
+-------------------------------------------------------------------
 Thu Jul 12 10:03:41 CEST 2007 - locilka@suse.cz
 
 - 2.15.0
