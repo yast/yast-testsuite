@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 29 10:17:09 CET 2008 - coolo@suse.de
+
+- fix buildrequires after yast2-core split
+- 2.16.1
+
+-------------------------------------------------------------------
 Mon Nov  5 14:17:08 CET 2007 - mvidner@suse.cz
 
 - Use ./test.ycp instead of test.ycp when building (#330965).

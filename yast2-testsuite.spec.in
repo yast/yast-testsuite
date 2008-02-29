@@ -1,7 +1,7 @@
 @HEADER-COMMENT@
 
 @HEADER@
-BuildRequires:	openslp-devel perl-XML-Writer popt-devel yast2-core-devel yast2-devtools
+BuildRequires:	openslp-devel perl-XML-Writer popt-devel yast2-core-devel yast2-devtools yast2-ycp-ui-bindings
 Requires:	expect dejagnu
 Requires:	yast2-core
 Summary:	YaST2 testsuite
