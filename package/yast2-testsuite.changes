@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr  8 13:09:41 CEST 2008 - mvidner@suse.cz
+
+- Enable make check before make install, by telling y2base to search
+  first in ../src (fate#2306).
+- 2.16.2
+
+-------------------------------------------------------------------
 Fri Feb 29 10:17:09 CET 2008 - coolo@suse.de
 
 - fix buildrequires after yast2-core split

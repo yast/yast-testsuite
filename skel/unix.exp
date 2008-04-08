@@ -47,12 +47,22 @@ proc testsuite-run { src } {
   set tmperr_name "tmp.err.$base_name"
   set tmplog_name "tmp.log.$base_name"
 
+  # fate#2306: enable make check *gasp* before make install
+  # by searching in the source directory
+  set options ""
+  # first hack: look for the usual suspects
+  # (next steps: use YCPCFLAGS)
+  set sourcedir "../src"
+  if {[file isdirectory $sourcedir]} {
+      set options "-I $sourcedir -M $sourcedir"
+  }
+
   puts "Running $base_name ..."
 
   # run the test
 
   set result ""
-  set oops [catch { set result [exec "run/runtest.sh" "$test_input" "$tmpout_name" "$tmperr_name" ] } catched]
+  set oops [catch { set result [exec "run/runtest.sh" $options "$test_input" "$tmpout_name" "$tmperr_name" ] } catched]
 
   if {$oops != 0} {
     fail "Test case failed for $base_name: $catched"

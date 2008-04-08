@@ -16,12 +16,6 @@ while [ $# -gt 3 ]; do
     shift
 done
 
-# but now y2base does not support them :-(
-if [ "$OPTIONS" ]; then
-    echo "Options not supported yet, discarding '$OPTIONS'" >&2
-    OPTIONS=""
-fi
-
 unset LANG
 unset LC_CTYPE
 unset LC_NUMERIC
