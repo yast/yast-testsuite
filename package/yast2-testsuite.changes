@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jun 16 14:29:30 CEST 2009 - mvidner@suse.cz
+
+- Using autodocs-ycp.ami, which contains a fix for automake 1.11.
+
+-------------------------------------------------------------------
 Tue Apr  8 13:09:41 CEST 2008 - mvidner@suse.cz
 
 - Enable make check before make install, by telling y2base to search
