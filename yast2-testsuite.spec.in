@@ -10,7 +10,8 @@ Summary:	YaST2 - Testsuite
 BuildArchitectures: noarch
 
 %description
--
+This is a package for the YaST2 modules testsuite preparation and
+execution.
 
 @PREP@
 
