@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jun 29 12:19:01 CEST 2009 - mvidner@suse.cz
+
+- Moved Summary and Description from PDB to spec.
+
+-------------------------------------------------------------------
 Tue Jun 16 14:29:30 CEST 2009 - mvidner@suse.cz
 
 - Using autodocs-ycp.ami, which contains a fix for automake 1.11.
