@@ -13,7 +13,6 @@ skel_DATA =			\
 	unix.exp		\
 	unknown.exp		\
 	Makefile_am		\
-	_cvsignore		\
 	testsuite.exp		\
 	runtest.sh
 
