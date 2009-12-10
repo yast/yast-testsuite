@@ -14,7 +14,7 @@ testsuite_dirs=$(srcdir)/run $(srcdir)/config $(srcdir)/$(RPMNAME).test
 files_config=$(srcdir)/config/default.exp $(srcdir)/config/unix.exp $(srcdir)/config/unknown.exp
 files_run=$(srcdir)/run/runtest.sh
 files_test=$(srcdir)/$(RPMNAME).test/testsuite.exp
-files_tmpl=$(srcdir)/Makefile.am $(srcdir)/.cvsignore
+files_tmpl=$(srcdir)/Makefile.am
 files_all=$(files_config) $(files_test) $(files_tmpl) $(files_run)
 
 all: $(files_all) $(testsuite_dirs)
@@ -53,7 +53,6 @@ prepare:
 	@mkdir testsuite
 	@echo Creating testsuite/tests
 	@mkdir testsuite/tests
-	@touch testsuite/tests/.cvsignore
 	@echo Preparing files
 	@make -C testsuite -f $(maindir)/Makefile.testsuite $(files_tmpl) $(files_tests)
 	@echo
