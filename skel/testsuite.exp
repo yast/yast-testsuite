@@ -19,10 +19,6 @@ set filenames [lsort [glob "$srcdir/tests/$pattern.ycp"]]
 
 puts "\nChecking started\n"
 
-foreach file $filenames {
-  if {[testsuite-run $file] < 0} {
-    return
-  }
-}
+foreach file $filenames { testsuite-run $file }
 
 puts "\nChecking finished\n"
