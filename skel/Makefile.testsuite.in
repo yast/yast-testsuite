@@ -31,9 +31,6 @@ $(testsuite_dirs):
 $(srcdir)/Makefile.am: $(skeldir)/Makefile_am
 	cmp -s $< $@ || cp -f $< $@
 
-$(srcdir)/.cvsignore: $(skeldir)/_cvsignore
-	cp -f $< $@
-
 $(srcdir)/run/runtest.sh: $(skeldir)/runtest.sh run
 	cp -f $< $@
 	chmod +x $@
