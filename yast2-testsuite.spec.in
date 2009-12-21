@@ -6,7 +6,7 @@ License: GPL v2 or later
 BuildRequires:	openslp-devel perl-XML-Writer popt-devel yast2-core-devel yast2-devtools yast2-ycp-ui-bindings
 Requires:	expect dejagnu
 # y2base -I includepath -M modulepath
-Requires:	yast2-core >= 2.16.45
+Requires:	yast2-core >= 2.19.0
 Summary:	YaST2 - Testsuite
 
 BuildArchitectures: noarch

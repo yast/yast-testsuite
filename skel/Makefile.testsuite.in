@@ -14,7 +14,7 @@ testsuite_dirs=$(srcdir)/run $(srcdir)/config $(srcdir)/$(RPMNAME).test
 files_config=$(srcdir)/config/default.exp $(srcdir)/config/unix.exp $(srcdir)/config/unknown.exp
 files_run=$(srcdir)/run/runtest.sh
 files_test=$(srcdir)/$(RPMNAME).test/testsuite.exp
-files_tmpl=$(srcdir)/Makefile.am
+#files_tmpl=$(srcdir)/Makefile.am
 files_all=$(files_config) $(files_test) $(files_tmpl) $(files_run)
 
 all: $(files_all) $(testsuite_dirs)
@@ -28,8 +28,8 @@ $(testsuite_dirs):
 # Overwrite the tested package's testsuite/Makefile.am only
 # if the template file is newer in content (which shouldn't
 # happen as it is only a proxy). Prevents automake mismatch errors.
-$(srcdir)/Makefile.am: $(skeldir)/Makefile_am
-	cmp -s $< $@ || cp -f $< $@
+#$(srcdir)/Makefile.am: $(skeldir)/Makefile_am
+#	cmp -s $< $@ || cp -f $< $@
 
 $(srcdir)/run/runtest.sh: $(skeldir)/runtest.sh run
 	cp -f $< $@

@@ -1,8 +1,14 @@
 -------------------------------------------------------------------
+Mon Dec 21 12:07:52 CET 2009 - aschnell@suse.de
+
+- don't override Makefile.am
+- extended runtest.sh
+- 2.19.0
+
+-------------------------------------------------------------------
 Fri Dec 11 16:07:09 CET 2009 - aschnell@suse.de
 
 - run all tests even if some fail
-- 2.17.0
 
 -------------------------------------------------------------------
 Mon Jun 29 12:19:01 CEST 2009 - mvidner@suse.cz
