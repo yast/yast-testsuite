@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue May 17 11:16:32 CEST 2011 - fehr@suse.de
+
+- backport changes by Arvin needed for ycp testsuite in storage
+- don't override Makefile.am
+- extended runtest.sh
+- run all tests even if some fail
+- 2.17.0
+
+-------------------------------------------------------------------
 Tue Apr  8 13:09:41 CEST 2008 - mvidner@suse.cz
 
 - Enable make check before make install, by telling y2base to search
