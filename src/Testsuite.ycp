@@ -89,7 +89,7 @@ global void DumpFile (string filename) {
     map res = (map) SCR::Execute (.target.bash_output, command);
     SCR::UnregisterAllAgents ();
 
-    string out = lookup (res, "stdout", " (nil)");
+    string out = res["stdout"]:" (nil)";
     list<string> lines = splitstring (out, "\n");
     maplist (string l, lines, {
 	return y2debug ("%1", l);
