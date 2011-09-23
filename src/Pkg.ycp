@@ -1,7 +1,6 @@
 {
     module "Pkg";
     
-    global define boolean 		AnyToInstall 		() { return true; }
     global define boolean 		ClearSaveState 		() { return true; }
     global define void 			CreateBackups 		(boolean b) { return; }
     global define map<string,any>	DoProvide 		(list<string> l) { return nil; }
@@ -9,14 +8,11 @@
     global define list<string>		FilterPackages		(boolean b, boolean c, boolean d, boolean e) { return nil; }
     global define list<string>		GetAdditionalLocales	() { return nil; }
     global define string		GetBackupPath 		() { return nil; }
-    global define string		GetLocale 		() { return nil; }
     global define list<string>		GetPackages		(symbol s, boolean b) { return nil; }
-    global define void			InstSysMode 		() { return; }
     global define boolean 		IsAvailable		(string s) { return true; }
     global define boolean 		IsManualSelection	() { return true; }
     global define boolean 		IsProvided		(string s) { return true; }
     global define boolean 		IsSelected		(string s) { return true; }
-    global define boolean 		PkgAnyToDelete		() { return true; }
     global define list<any>		PkgCommit		(integer i) { return nil; }
     global define boolean 		PkgDelete		(string s) { return true; }
     global define string		PkgGroup		(string s) { return nil; }
@@ -35,32 +31,25 @@
     global define boolean 		SaveState		() { return true; }
     global define void			SetAdditionalLocales	(list<string> l) { return; }
     global define void			SetBackupPath		(string s) { return; }
-    global define void			SetLocale		(string s) { return; }
     global define boolean 		SourceCacheCopyTo	(string s) { return true; }
     global define boolean 		SourceChangeUrl		(integer i, string s) { return true; }
     global define integer		SourceCreate		(string s, string t) { return nil; }
     global define boolean 		SourceDelete		(integer i) { return true; }
-    global define boolean 		SourceFinish		(integer i) { return true; }
     global define boolean 		SourceFinishAll		() { return true; }
     global define map<string, any>	SourceGeneralData	(integer i) { return nil; }
     global define list<any>		SourceGetCurrent	(boolean b) { return nil; }
-    global define boolean 		SourceInstallOrder	(map<integer,integer> m) { return true; }
     global define void			SourceLowerPriority	(integer i) { return; }
     global define map<string,any>	SourceMediaData		(integer i) { return nil; }
-    global define map<string,string>	SourceProduct		(integer i) { return nil; }
     global define map<string,any>	SourceProductData	(integer i) { return nil; }
-    global define string		SourceProvideDir	(integer i, integer j, string s) { return nil; }
+    global define string		SourceProvideDirectory	(integer i, integer j, string s, boolean a, boolean b) { return nil; }
     global define string		SourceProvideFile	(integer i, integer j, string s) { return nil; }
     global define boolean 		SourceRaisePriority	(integer i) { return true; }
-    global define boolean 		SourceSaveRanks		() { return true; }
     global define boolean 		SourceSetEnabled	(integer i, boolean b) { return true; }
-    global define boolean 		SourceSetRamCache	(boolean b) { return true; }
     global define list<integer>		SourceStartCache	(boolean b) { return nil; }
     global define boolean 		SourceStartManager	(boolean b) { return true; }
     global define void			TargetInitDU		(list<map<any,any> > l) { return; }
     global define integer		TargetBlockSize		(string s) { return nil; }
     global define integer		TargetCapacity		(string s) { return nil; }
-    global define boolean 		TargetFileHasOwner	(string s) { return true; }
     global define boolean 		TargetFinish		() { return true; }
     global define map<string,any>	TargetGetDU		() { return nil; }
     global define boolean 		TargetInit		(string s, boolean b) { y2error ("It's alive"); return true; }
@@ -68,11 +57,9 @@
     global define list<any>		TargetProducts		() { return nil; }
     global define boolean 		TargetRebuildDB		() { return true; }
     global define boolean 		TargetRemove		(string s) { return nil; }
-    global define map<string,string> 	TargetUpdateInf		(string s) { return nil; }
     global define integer		TargetUsed		(string s) { return nil; }
     global define list<integer>		PkgUpdateAll		(boolean b) { return nil; }
     global define string		LastError		() { return nil; }
-    global define string		LastErrorId		() { return nil; }
     global define string		LastErrorDetails	() { return nil; }
 
     // callback registration routines
@@ -85,10 +72,6 @@
     global define void			CallbackProgressPackage (string s) { return nil; }
     global define void			CallbackDonePackage	(string s) { return nil; }
     global define void			CallbackProgressRebuildDB (string s) { return nil; }
-    global define void			CallbackYouProgress 	(string s) { return nil; }
-    global define void			CallbackYouPatchProgress (string s) { return nil; }
-    global define void			CallbackYouExecuteYcpScript (string s) { return nil; }
-    global define void			CallbackYouScriptProgress (string s) { return nil; }
     global define void			CallbackStartConvertDb	(string s) { return nil; }
     global define void			CallbackProgressConvertDb (string s) { return nil; }
     global define void			CallbackNotifyConvertDb	(string s) { return nil; }
