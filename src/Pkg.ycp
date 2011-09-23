@@ -65,7 +65,6 @@
     global define map<string,any>	TargetGetDU		() { return nil; }
     global define boolean 		TargetInit		(string s, boolean b) { y2error ("It's alive"); return true; }
     global define boolean 		TargetInstall		(string s) { return true; }
-    global define boolean 		TargetLogfile		(string s) { return true; }
     global define list<any>		TargetProducts		() { return nil; }
     global define boolean 		TargetRebuildDB		() { return true; }
     global define boolean 		TargetRemove		(string s) { return nil; }
