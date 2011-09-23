@@ -1,10 +1,8 @@
 {
     module "Pkg";
     
-    global define boolean 		ActivateSelections 	() { return true; }
     global define boolean 		AnyToInstall 		() { return true; }
     global define boolean 		ClearSaveState 		() { return true; }
-    global define boolean 		ClearSelection 		(string s) { return true; }
     global define void 			CreateBackups 		(boolean b) { return; }
     global define map<string,any>	DoProvide 		(list<string> l) { return nil; }
     global define map<string,any>	DoRemove 		(list<string> l) { return nil; }
@@ -13,7 +11,6 @@
     global define string		GetBackupPath 		() { return nil; }
     global define string		GetLocale 		() { return nil; }
     global define list<string>		GetPackages		(symbol s, boolean b) { return nil; }
-    global define list<string>		GetSelections		(symbol s, string t) { return nil; }
     global define void			InstSysMode 		() { return; }
     global define boolean 		IsAvailable		(string s) { return true; }
     global define boolean 		IsManualSelection	() { return true; }
@@ -36,12 +33,9 @@
     global define boolean		PkgReset		() { return true; }
     global define boolean 		RestoreState		(boolean b) { return true; }
     global define boolean 		SaveState		() { return true; }
-    global define list<string>		SelectionContent	(string s, boolean b, string t) { return nil; }
-    global define map<string,any>	SelectionData		(string s) { return nil; }
     global define void			SetAdditionalLocales	(list<string> l) { return; }
     global define void			SetBackupPath		(string s) { return; }
     global define void			SetLocale		(string s) { return; }
-    global define boolean 		SetSelection		(string s) { return true; }
     global define boolean 		SourceCacheCopyTo	(string s) { return true; }
     global define boolean 		SourceChangeUrl		(integer i, string s) { return true; }
     global define integer		SourceCreate		(string s, string t) { return nil; }
@@ -77,20 +71,6 @@
     global define boolean 		TargetRemove		(string s) { return nil; }
     global define map<string,string> 	TargetUpdateInf		(string s) { return nil; }
     global define integer		TargetUsed		(string s) { return nil; }
-    global define boolean 		YouAttachSource		() { return true; }
-    global define boolean 		YouDisconnect		() { return true; }
-    global define boolean 		YouFinish		() { return true; }
-    global define map<any,any>		YouFirstPatch		(boolean b) { return nil; }
-    global define string		YouGetCurrentPatch	(boolean b, boolean c) { return nil; }
-    global define string		YouGetDirectory		() { return nil; }
-    global define boolean		YouGetPackages		() { return true; }
-    global define string		YouGetPatches		(string s, boolean b, boolean c) { return nil; }
-    global define boolean		YouInstallCurrentPatch	() { return true; }
-    global define boolean 		YouInstallPatches	() { return true; }
-    global define map<any,any>		YouNextPatch		() { return nil; }
-    global define boolean 		YouRemovePackages	() { return true; }
-    global define void			YouSelectPatches	() { return; }
-    global define map<any, any>		YouStatus		() { return nil; }
     global define list<integer>		PkgUpdateAll		(boolean b) { return nil; }
     global define string		LastError		() { return nil; }
     global define string		LastErrorId		() { return nil; }
