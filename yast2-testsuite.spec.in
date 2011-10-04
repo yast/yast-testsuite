@@ -2,7 +2,7 @@
 
 @HEADER@
 Group:	System/YaST
-License: GPL v2 or later
+License: GPL-2.0+
 BuildRequires:	openslp-devel perl-XML-Writer popt-devel yast2-core-devel yast2-devtools yast2-ycp-ui-bindings
 Requires:	expect dejagnu
 # y2base -I includepath -M modulepath
