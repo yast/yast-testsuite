@@ -18,16 +18,12 @@ proc testsuite-run { src } {
   set path [split $src "/"]
   set filename [lindex $path [expr [llength $path]-1]]
 
-  # extract basename and check extension
+  # extract basename
 
   set fname [split $filename "."]
 
   if {[llength $fname] < 2} {
     fail "Bad filename syntax '$src'"
-    return -1
-  }
-  if {[lindex $fname [expr [llength $fname]-1]] != "ycp"} {
-    fail "Not .ycp extension '$src'"
     return -1
   }
 
