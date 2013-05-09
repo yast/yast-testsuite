@@ -61,14 +61,14 @@ parse() {
   if [ -z "$Y2TESTSUITE" ]; then
     # errors are OK if they come from YCP (or Perl, #41448),
     # mark them for output
-    sed1="s/ <[2-5]> [^ ]\+ \[\(YCP\|Perl\)\] \([^ ]\+\) / <0> host [YCP] \2 ${DUMMY_LOG_STRING}Log	/"
+    sed1="s/ <[2-5]> [^ ]\+ \[\(YCP\|Perl\|Ruby\)\] \([^ ]\+\) / <0> host [YCP] \2 ${DUMMY_LOG_STRING}Log	/"
     # leave only essential info
     sed2="s/^.*$DUMMY_LOG_STRING//g"
     ycp="\[YCP\].*$DUMMY_LOG_STRING"
     components="(agent-dummy|YCP)"
     cat "$file" | sed "$sed1" | grep -E "<[012]>[^]]*$components.*$regex.*$DUMMY_LOG_STRING" | sed "$sed2" # | cut -d" " -f7-
     # Y2PMrc: #38235
-    cat "$file" | grep "<[345]>" | grep -v "\[\(YCP\|Perl\|Y2PMrc\)\]" >&2
+    cat "$file" | grep "<[345]>" | grep -v "\[\(YCP\|Perl\|Ruby\|Y2PMrc\)\]" >&2
   else
     echo "Y2TESTSUITE set to \"$Y2TESTSUITE\""
     echo
@@ -77,7 +77,8 @@ parse() {
   rm -f "$file"
 }
 
-( Y2DIR=$Y2DIR:$Y2BASE_Y2DIR LD_LIBRARY_PATH=$Y2BASE_LD_LIBRARY_PATH $Y2BASE -l - -c "$logconf" $Y2BASEFLAGS $OPTIONS "$1" UI 2>&1 ) | parse >"$2" 2>"$3"
+client="./${1%.*}"
+( Y2DIR=$Y2DIR:$Y2BASE_Y2DIR LD_LIBRARY_PATH=$Y2BASE_LD_LIBRARY_PATH $Y2BASE -l - -c "$logconf" $Y2BASEFLAGS $OPTIONS "$client" UI 2>&1 ) | parse >"$2" 2>"$3"
 
 retcode="$PIPESTATUS"
 if [ "$retcode" -gt 0 ]; then
