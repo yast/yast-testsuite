@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 14 13:04:04 UTC 2013 - mvidner@suse.com
+
+- Make "testedfiles" work on Ruby files (bnc#819137).
+- 2.24.1
+
+-------------------------------------------------------------------
 Thu May  9 12:13:37 UTC 2013 - mvidner@suse.cz
 
 - Run Ruby test cases as well as YCP test cases (bnc#819137).
