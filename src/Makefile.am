@@ -9,7 +9,6 @@ ynclude_DATA =			\
 
 module_DATA =			\
 	Testsuite.ycp
-#	Pkg.ycp
 
 EXTRA_DIST = $(ynclude_DATA) $(module_DATA)
 
