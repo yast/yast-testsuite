@@ -48,11 +48,12 @@ fi
 
 DUMMY_LOG_STRING="LOGTHIS_SECRET_314 "
 
-files="$(grep '^[/*[:space:]]*testedfiles:' "$1"|sed 's/.*testedfiles:[[:space:]]*//g')"
+files="$(grep '^[#/*[:space:]]*testedfiles:' "$1"|sed 's/.*testedfiles:[[:space:]]*//g')"
 if [ "$files" ]; then
   echo "$files" >> testsuite.log
   regex="[ /](testsuite\.ycp|Testsuite\.ycp|$(echo "$files"|sed 's|\.|\\.|g'|sed 's| |\||g')):"
 fi
+regex=${regex//.ycp/.(ycp|rb)}
 echo "$regex" >> testsuite.log
 
 parse() {
