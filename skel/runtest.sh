@@ -8,8 +8,6 @@
 # $3 = stderr
 #
 # These arguments may be preceded by options that will be passed to y2base
-#
-# $Id$
 
 while [ $# -gt 3 ]; do
     OPTIONS="$OPTIONS $1"
@@ -66,7 +64,7 @@ parse() {
     # leave only essential info
     sed2="s/^.*$DUMMY_LOG_STRING//g"
     ycp="\[YCP\].*$DUMMY_LOG_STRING"
-    components="(agent-dummy|YCP)"
+    components="(agent-dummy|YCP|Ruby)"
     cat "$file" | sed "$sed1" | grep -E "<[012]>[^]]*$components.*$regex.*$DUMMY_LOG_STRING" | sed "$sed2" # | cut -d" " -f7-
     # Y2PMrc: #38235
     cat "$file" | grep "<[345]>" | grep -v "\[\(YCP\|Perl\|Ruby\|Y2PMrc\)\]" >&2
