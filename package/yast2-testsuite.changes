@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May 16 13:26:32 UTC 2013 - mvidner@suse.com
+
+- correctly pass the logging produced by Testsuite.rb (bnc#819137).
+- 2.24.2
+
+-------------------------------------------------------------------
 Tue May 14 13:04:04 UTC 2013 - mvidner@suse.com
 
 - Make "testedfiles" work on Ruby files (bnc#819137).
