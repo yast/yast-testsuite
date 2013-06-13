@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jun 13 13:36:57 UTC 2013 - lslezak@suse.cz
+
+- skip files which do not have the corresponding stderr and stdout
+  files, these are likely just include files, not real tests
+
+-------------------------------------------------------------------
 Thu May 16 13:26:32 UTC 2013 - mvidner@suse.com
 
 - correctly pass the logging produced by Testsuite.rb (bnc#819137).

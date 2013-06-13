@@ -53,6 +53,13 @@ proc testsuite-run { src } {
       set options "-I $sourcedir -M $sourcedir"
   }
 
+  # skip the file if there is no stderr and stdout file,
+  # it is likely just an include file which should not be executed
+  if {[expr ![file exists $stderr_name]] && [expr ![file exists $stdout_name]]} {
+      puts "Skipping file $fname ..."
+      return 0
+  }
+
   puts "Running $base_name ..."
 
   # run the test
