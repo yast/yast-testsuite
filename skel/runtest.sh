@@ -52,6 +52,7 @@ if [ "$files" ]; then
   regex="[ /](testsuite\.ycp|Testsuite\.ycp|$(echo "$files"|sed 's|\.|\\.|g'|sed 's| |\||g')):"
 fi
 regex=${regex//.ycp/.(ycp|rb)}
+regex=${regex//.yh/.(yh|rb)}
 echo "$regex" >> testsuite.log
 
 parse() {
