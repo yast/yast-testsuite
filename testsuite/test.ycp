@@ -16,7 +16,7 @@
 
 {
 
-include "./../src/testsuite.ycp";
+include "testsuite.ycp";
 
 map READ = $[ "read" : $[ "path" : "read_result" ] ];
 map WRITE = $[ "write" : $[ "path" : true ] ];
