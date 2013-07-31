@@ -1,15 +1,11 @@
-#
-# Makefile.am for testsuite/src
-#
-# $Id$
-#
+# Sources for testsuite
 
-ynclude_DATA =			\
-	testsuite.ycp
+module_DATA = \
+  modules/Testsuite.rb
 
-module_DATA =			\
-	Testsuite.ycp
+ynclude_DATA = \
+  include/testsuite.rb
 
-EXTRA_DIST = $(ynclude_DATA) $(module_DATA)
+EXTRA_DIST = $(module_DATA) $(ynclude_DATA)
 
 include $(top_srcdir)/Makefile.am.common
