@@ -26,7 +26,7 @@ Source0:        %{name}-%{version}.tar.bz2
 Group:	        System/YaST
 License:        GPL-2.0+
 BuildRequires:	yast2-core-devel yast2-ycp-ui-bindings
-BuildRequires:  yast2-devtools >= 3.0.6
+BuildRequires:  yast2-devtools >= 3.1.10
 BuildRequires:  yast2-ruby-bindings >= 1.0.0
 Requires:	expect dejagnu
 # y2base -I includepath -M modulepath
