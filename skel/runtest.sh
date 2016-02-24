@@ -77,6 +77,12 @@ parse() {
   rm -f "$file"
 }
 
+# Set a good default value so the testsuite can use the local modules
+# instead of the system ones.
+if [ -z "${Y2DIR+x}" ] && [ -d ../src ]; then
+	Y2DIR="../src"
+fi
+
 ( Y2DIR=$Y2DIR:$Y2BASE_Y2DIR LD_LIBRARY_PATH=$Y2BASE_LD_LIBRARY_PATH $Y2BASE -l - -c "$logconf" $Y2BASEFLAGS $OPTIONS "$1" UI 2>&1 ) | tee "raw.$3" | parse >"$2" 2>"$3"
 
 retcode="$PIPESTATUS"
