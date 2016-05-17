@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 17 15:52:40 UTC 2016 - mvidner@suse.com
+
+- Prevent failures with dejagnu-1.6 (bsc#979519).
+- 3.1.4
+
+-------------------------------------------------------------------
 Mon Mar  7 12:46:40 UTC 2016 - mvidner@suse.com
 
 - Default Y2DIR to ../src to enable 'make check'
