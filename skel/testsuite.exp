@@ -15,7 +15,10 @@ if [catch {set pattern $CASE }] {
     set pattern "*"
 }
 
-set filenames [lsort [glob "$srcdir/tests/$pattern.{ycp,rb}"]]
+if [catch {set filenames [glob "$srcdir/tests/$pattern.{ycp,rb}"]}] {
+    puts "\nNo test cases found\n"
+    exit 0
+}
 
 puts "\nChecking started\n"
 
