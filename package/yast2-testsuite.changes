@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Sep 16 08:58:29 UTC 2016 - jreidinger@suse.com
+
+- reduce build dependencies to speed up build (bnc#999203)
+- 3.1.6
+
+-------------------------------------------------------------------
 Mon Jun  6 08:13:18 UTC 2016 - igonzalezsosa@suse.com
 
 - Stop generating autodocs (fate#320356)
