@@ -1,6 +1,7 @@
 Makefile
 /Makefile.am
 Makefile.in
+Makefile.testsuite
 aclocal.m4
 autom4te.cache
 config.cache
@@ -27,3 +28,6 @@ Makefile.am.common
 .dep
 tmp.*
 *.log
+/.yardoc
+doc/autodocs
+testsuite/*.err
