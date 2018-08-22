@@ -24,7 +24,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Source0:        %{name}-%{version}.tar.bz2
 
 Group:	        System/YaST
-License:        GPL-2.0+
+License:        GPL-2.0-or-later
 BuildRequires:  yast2-devtools >= 3.1.10
 Requires:	expect dejagnu
 # y2base -I includepath -M modulepath
