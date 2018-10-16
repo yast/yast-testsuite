@@ -54,3 +54,4 @@ execution.
 %{yast_ydatadir}
 %{yast_yncludedir}
 %doc %{yast_docdir}
+%license COPYING
