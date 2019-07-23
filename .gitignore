@@ -1,6 +1,7 @@
 Makefile
 /Makefile.am
 Makefile.in
+Makefile.am.common
 aclocal.m4
 autom4te.cache
 config.cache
@@ -13,6 +14,7 @@ config.sub
 configure
 configure.ac
 depcomp
+doc/autodocs
 install-sh
 *.pot
 libtool
@@ -21,7 +23,9 @@ ltmain.sh
 missing
 mkinstalldirs
 stamp-h*
-Makefile.am.common
+skel/Makefile.testsuite
+testsuite/raw.tmp.*
+.yardoc/
 *.ami
 *.bz2
 .dep
